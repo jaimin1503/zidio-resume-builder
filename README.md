@@ -1,1 +1,1 @@
-# zinio-resume-builder
+# zidio-resume-builder
