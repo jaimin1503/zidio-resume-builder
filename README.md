@@ -9,11 +9,17 @@
     ```sh
     git clone https://github.com/your-username/zidio-resume-builder.git
     ```
-3. **Set up the environment**: Follow the instructions in the [INSTALL.md](INSTALL.md) file to set up your development environment.
-4. **Install dependencies**: Install the necessary dependencies:
-    ```sh
-    npm install
-    ```
+3. **Set up the environment**:
+   1. go to backend directory and set up environment variables from ".env.example"
+   2. install dependencies
+      ```sh
+        npm install
+      ```
+   4. go to frontend directory and set up environment variables from ".env.example"
+   5. install dependencies
+      ```sh
+        npm install
+      ```
 
 ## How to Contribute
 
