@@ -109,7 +109,7 @@ export default function Login() {
         </form>
         <div className=" text-center">
           <p className=" my-8 w-full border-b leading-[.1em]">
-            <span className=" bg-black px-2 text-pure-greys-100">or</span>
+            <span className=" bg-black px-2 ">or</span>
           </p>
         </div>
         <div className="flex justify-center items-center mt-5">
