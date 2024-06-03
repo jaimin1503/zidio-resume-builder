@@ -1,6 +1,9 @@
 import { User } from "../models/userModel.js";
 import { Profile } from "../models/profileModel.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const signup = async (req, res) => {
   try {
@@ -96,5 +99,75 @@ export const signup = async (req, res) => {
         message: `Something went wrong while signing up. and error is ${error}`,
       });
     }
+  }
+};
+
+export const login = async (req, res) => {
+  try {
+    const { identifier, password } = req.body;
+    if (!identifier || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Please provide both username or email and password",
+      });
+    }
+
+    const user = await User.findOne({
+      $or: [{ email: identifier }, { userName: identifier }],
+    }).populate("profile");
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User does not exist. Please check Username or Email",
+      });
+    }
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid email or password. Please try again.",
+      });
+    }
+
+    const payload = {
+      _id: user._id,
+      email: user.email,
+      useNname: user.userName,
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "30d",
+    });
+
+    user.token = token;
+    user.password = undefined;
+
+    const options = {
+      expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    };
+
+    // Set token in a cookie
+    res.cookie("token", token, options);
+
+    // Set the token in the "Authorization" header (optional)
+    res.set("Authorization", `Bearer ${token}`);
+
+    return res.status(200).json({
+      success: true,
+      token,
+      user,
+      message: "User logged in successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: `Something went wrong while logging in: ${error.message}`,
+    });
   }
 };
