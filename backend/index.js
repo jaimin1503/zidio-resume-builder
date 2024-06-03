@@ -4,6 +4,7 @@ import connect from "./utils/db.js";
 import dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
+import userRoutes from "./routes/userRoutes.js";
 
 connect();
 const app = express();
@@ -16,6 +17,8 @@ app.use(
     credentials: true,
   })
 );
+
+app.use("/user", userRoutes);
 
 const port = process.env.PORT || 5555;
 app.listen(port, () => {

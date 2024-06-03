@@ -9,7 +9,7 @@ const userSchema = mongoose.Schema({
     type: "string",
     required: true,
   },
-  username: {
+  userName: {
     type: "string",
     unique: true,
     required: true,
@@ -27,19 +27,9 @@ const userSchema = mongoose.Schema({
     type: "string",
     default: "India",
   },
-  role: {
-    type: "string",
-    required: true,
-  },
   profile: {
     type: Schema.Types.ObjectId,
     ref: "Profile",
-  },
-  resetPasswordToken: {
-    type: "string",
-  },
-  tokenExpireTime: {
-    type: "Date",
   },
 });
 

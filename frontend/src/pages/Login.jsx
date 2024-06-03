@@ -17,46 +17,17 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    setTimeout(() => {
-      toast(
-        "Please wait for a while it may take some time to login as it is your first request",
-        {
-          duration: 5000,
-          position: "top-center",
-          style: {},
-          className: "",
-          icon: "👏",
-          iconTheme: {
-            primary: "#000",
-            secondary: "#fff",
-          },
-          ariaProps: {
-            role: "status",
-            "aria-live": "polite",
-          },
-        }
-      );
-    }, 3000);
-
     const toastId = toast.loading("Logging in...");
     // Send a POST request to the server
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/user/login`,
+        `http://localhost:5555/user/login`,
         formData,
         { withCredentials: true }
       );
       if (response.status === 200) {
         localStorage.setItem("token", response.data.token);
-        if (response.data.user.profile.current_position === "") {
-          navigate(`/profile/${response.data.user?.profile?._id}`);
-        } else {
-          navigate(
-            response.data.user.role === "freelancer"
-              ? "/freelancerdb"
-              : "/clientdb"
-          );
-        }
+        navigate("/");
         toast.success(`Welcome ${formData.identifier}`, {
           duration: 4000,
           position: "top-right",

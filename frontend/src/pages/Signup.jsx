@@ -1,40 +1,59 @@
 import "./Styles.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setLoading, setSignupData } from "../redux/slices/authSlice";
+import { signUp } from "../utils/auth";
 
 export default function Signup() {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    userName: "",
+    email: "",
+    password: "",
+    location: "",
+  });
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    dispatch(setLoading(true));
+    dispatch(signUp(formData, navigate, setError));
+    dispatch(setLoading(false));
+  };
+
   return (
     <div className=" text-white w-fit mx-auto md:border-2 max-w-lg border-blue-300 rounded-2xl p-10 mt-20">
       <h1 className="text-3xl sm:text-4xl font-medium text-center mb-10">
         SignUp to "Resume-Builder"
       </h1>
       {error && <div className="text-red-500 mb-4">{error}</div>}
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           className="input-field bg-black"
           placeholder="FirstName"
           onChange={handleChange}
-          name="firstname"
-          value={formData.firstname || ""}
+          name="firstName"
+          value={formData.firstName || ""}
         />
         <input
           type="text"
           className="input-field bg-black"
           placeholder="Lastname"
           onChange={handleChange}
-          name="lastname"
-          value={formData.lastname || ""}
+          name="lastName"
+          value={formData.lastName || ""}
         />
         <input
-          type="text"
+          type="email"
           className="input-field bg-black"
           placeholder="Email"
           onChange={handleChange}
@@ -46,11 +65,11 @@ export default function Signup() {
           className="input-field bg-black"
           placeholder="Username"
           onChange={handleChange}
-          name="username"
-          value={formData.username || ""}
+          name="userName"
+          value={formData.userName || ""}
         />
         <input
-          type="text"
+          type="password"
           className="input-field bg-black"
           placeholder="Password"
           onChange={handleChange}
