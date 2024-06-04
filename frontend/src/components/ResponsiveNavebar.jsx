@@ -10,26 +10,40 @@ const ResponsiveNavebar = ({ toggleDrawer }) => {
       <div className=" w-screen sm:w-[340px] text-white">
         <ul>
           <li className=" p-4 border-b flex">
-            <a className=" text-2xl font-bold" href={"/home"}>
-              DO-REMOTE
+            <a className=" text-2xl font-bold" href="/">
+              ResumeHub
             </a>
           </li>
           <li className=" p-4 border-b flex">
-            <Link to="development">Development & IT</Link>
+            <a className=" text-lg" href="/">
+              Build Resume
+            </a>
           </li>
           <li className=" p-4 border-b flex">
-            <Link to="aids">Design & Creative</Link>
+            <a className=" text-lg" href="/">
+              Cover letter
+            </a>
           </li>
           <li className=" p-4 border-b flex">
-            <Link to="aids">AI and Data Science</Link>
+            <a className=" text-lg" href="/">
+              Carrier Advice
+            </a>
           </li>
           <li className=" p-4 border-b flex">
-            <a className=" float-right text-blue-100 font-medium pl-5" href="/">
+            <a className=" text-lg" href="/">
+              About Us
+            </a>
+          </li>
+          <li className=" p-4 border-b flex">
+            <a
+              className=" float-right text-blue-100 font-medium pl-5"
+              href="/login"
+            >
               Login
             </a>
           </li>
-          <li className=" p-4 border-b flex">
-            <a href="/welcome">
+          <li className=" p-4 flex">
+            <a href="/signup">
               <button className=" bg-blue-200 rounded-full py-2 px-4 text-white hover:bg-blue-300">
                 <span>Sign Up</span>
               </button>
