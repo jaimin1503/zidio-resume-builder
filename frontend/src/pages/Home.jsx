@@ -1,7 +1,11 @@
+import HomepageHero from "../components/HomepageHero";
+
 export default function Home() {
   return (
-    <div>
-      <div className=" text-5xl text-white">Welcome to Resume Builder</div>
-    </div>
+    <>
+      <div className="row1 my-10">
+        <HomepageHero />
+      </div>
+    </>
   );
 }
