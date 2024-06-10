@@ -31,6 +31,7 @@ const userSchema = mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: "Profile",
   },
+  resumes: [{ type: Schema.Types.ObjectId, ref: "Resume" }],
 });
 
 export const User = mongoose.model("User", userSchema);

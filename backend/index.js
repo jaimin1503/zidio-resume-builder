@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
 import userRoutes from "./routes/userRoutes.js";
+import resumeRoutes from "./routes/resumeRoutes.js";
 
 connect();
 const app = express();
@@ -19,6 +20,7 @@ app.use(
 );
 
 app.use("/user", userRoutes);
+app.use("/resume", resumeRoutes);
 
 const port = process.env.PORT || 5555;
 app.listen(port, () => {
