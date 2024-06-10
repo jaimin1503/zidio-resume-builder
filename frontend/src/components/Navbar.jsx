@@ -1,15 +1,34 @@
 import Drawer from "@mui/material/Drawer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ResponsiveNavebar from "./ResponsiveNavebar";
 import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../utils/auth";
+import { setToken } from "../redux/slices/authSlice";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const { token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    window.location.href = "/login";
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      dispatch(setToken(token));
+    }
+  }, [dispatch]);
+
   return (
     <>
       <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
@@ -19,7 +38,11 @@ export default function Navbar() {
             height: "100%",
           }}
         >
-          <ResponsiveNavebar toggleDrawer={toggleDrawer} />
+          <ResponsiveNavebar
+            token={token}
+            handleLogout={handleLogout}
+            toggleDrawer={toggleDrawer}
+          />
         </Box>
       </Drawer>
       <div className=" flex items-center">
@@ -68,21 +91,32 @@ export default function Navbar() {
               </li>
             </ul>
           </div>
-          <div className="right flex items-center mx-4">
-            <div className="login">
+          {!token ? (
+            <div className="right flex items-center mx-4">
+              <Link to={"/login"} className="login">
+                <button
+                  className=" mx-4 font-medium hover:text-blue-100"
+                  style={{ transition: "0.3s" }}
+                >
+                  Login
+                </button>
+              </Link>
+              <Link to={"/signup"} className="signup">
+                <button className=" py-2 px-4 font-medium bg-blue-400 hover:bg-blue-500 rounded-[5px]">
+                  SignUp
+                </button>
+              </Link>
+            </div>
+          ) : (
+            <div className=" mx-4">
               <button
-                className=" mx-4 hover:text-blue-100"
-                style={{ transition: "0.3s" }}
+                onClick={handleLogout}
+                className=" font-medium py-2 px-4 bg-blue-400 hover:bg-blue-500 rounded-[5px]"
               >
-                Login
+                Logout
               </button>
             </div>
-            <div className="signup">
-              <button className=" py-2 px-4 bg-blue-100 hover:bg-blue-200 rounded-[5px]">
-                SignUp
-              </button>
-            </div>
-          </div>
+          )}
         </nav>
       </div>
     </>

@@ -85,7 +85,7 @@ export default function Login() {
         </div>
         <div className="flex justify-center items-center mt-5">
           <p className="text-lg text-gray-600">Don't have an account?</p>
-          <a href="/signup" className="text-blue-500 ml-2">
+          <a href="/signup" className="text-blue-200 ml-2">
             Sign up
           </a>
         </div>

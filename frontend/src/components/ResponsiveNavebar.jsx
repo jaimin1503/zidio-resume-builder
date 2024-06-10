@@ -1,7 +1,7 @@
 import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
 
-const ResponsiveNavebar = ({ toggleDrawer }) => {
+const ResponsiveNavebar = ({ toggleDrawer, token, handleLogout }) => {
   return (
     <>
       <div className=" p-4 w-full flex justify-end text-white">
@@ -34,21 +34,34 @@ const ResponsiveNavebar = ({ toggleDrawer }) => {
               About Us
             </a>
           </li>
-          <li className=" p-4 border-b flex">
-            <a
-              className=" float-right text-blue-100 font-medium pl-5"
-              href="/login"
-            >
-              Login
-            </a>
-          </li>
-          <li className=" p-4 flex">
-            <a href="/signup">
-              <button className=" bg-blue-200 rounded-full py-2 px-4 text-white hover:bg-blue-300">
-                <span>Sign Up</span>
+          {!token ? (
+            <>
+              <li className=" p-4 border-b flex">
+                <a
+                  className=" float-right text-blue-200 font-medium pl-5"
+                  href="/login"
+                >
+                  Login
+                </a>
+              </li>
+              <li className=" p-4 flex">
+                <a href="/signup">
+                  <button className=" bg-blue-400 rounded-[5px] py-2 px-4 text-white hover:bg-blue-500">
+                    <span>Sign Up</span>
+                  </button>
+                </a>
+              </li>
+            </>
+          ) : (
+            <li className=" p-4">
+              <button
+                onClick={handleLogout}
+                className=" font-medium py-2 px-4 bg-blue-400 hover:bg-blue-500 rounded-[5px]"
+              >
+                Logout
               </button>
-            </a>
-          </li>
+            </li>
+          )}
         </ul>
       </div>
     </>
