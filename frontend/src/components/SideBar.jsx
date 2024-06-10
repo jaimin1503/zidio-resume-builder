@@ -15,7 +15,7 @@ export default function SideBar() {
   ];
 
   return (
-    <div className="rounded-2xl mx-10 absolute flex flex-col justify-center items-center bg-richblack-700 w-[379px] h-[600px] top-44 shadow-lg">
+    <div className="rounded-2xl flex flex-col justify-center items-center bg-richblack-700 w-[379px] h-[90vh] shadow-lg">
       {menuItems.map((item, index) => (
         <div key={index}>
           <MenuItem logo={item.logo} text={item.text} />
