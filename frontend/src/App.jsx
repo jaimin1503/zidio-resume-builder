@@ -7,6 +7,8 @@ import Signup from "./pages/Signup";
 import Card from "./components/Card";
 import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
+import FillDetails from "./pages/FillDetails";
+import Templates from "./pages/Templates";
 
 function App() {
   return (
@@ -16,10 +18,12 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/fillDetails" element={<FillDetails />} />
+        <Route path="/templates" element={<Templates />} />
       </Routes>
-      <Card />
-      <FAQ />
-      <Footer />
+      {/* <Card /> */}
+      {/* <FAQ /> */}
+      {/* <Footer />  */}
     </div>
   );
 }
