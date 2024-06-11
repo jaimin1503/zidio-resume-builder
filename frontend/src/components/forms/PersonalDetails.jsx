@@ -1,6 +1,6 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-export default function PersonalDetails() {
+export default function PersonalDetails({ index, setIndex }) {
   return (
     <div className="p-6 h-full w-full bg-richblack-700 rounded-2xl shadow-lg">
       <div className="flex justify-between items-center mb-6">
@@ -87,10 +87,13 @@ export default function PersonalDetails() {
         </div>
       </div>
       <div className="flex justify-between items-center mt-10">
-        <div className="cursor-pointer py-[0.7rem] px-3 text-gray-500 hover:text-black hover:bg-gray-200 rounded-full transition duration-300">
+        <div className=" py-[0.7rem] px-3 text-gray-500 hover:text-black hover:bg-gray-200 rounded-full transition duration-300 cursor-not-allowed">
           <ArrowBackIcon />
         </div>
-        <button className="py-3 px-6 bg-purple-600 hover:bg-purple-700 text-white rounded-md transition duration-300">
+        <button
+          onClick={() => setIndex((index + 1) % 5)}
+          className="py-3 px-6 bg-blue-400 hover:bg-blue-500 text-white rounded-md transition duration-300"
+        >
           Next session
         </button>
       </div>

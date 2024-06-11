@@ -1,6 +1,6 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-export default function EducationDetails() {
+export default function EducationDetails({ index, setIndex }) {
   return (
     <div className="p-6 h-full w-full bg-richblack-700 rounded-2xl shadow-lg text-black">
       <div className="flex justify-between items-center mb-6">
@@ -87,10 +87,16 @@ export default function EducationDetails() {
         </div>
       </div>
       <div className="flex justify-between items-center mt-10">
-        <div className="cursor-pointer py-[0.7rem] px-3 text-gray-500 text-white hover:text-black hover:bg-richblack-200 rounded-full transition duration-300">
+        <div
+          onClick={() => setIndex(index - 1)}
+          className="cursor-pointer py-[0.7rem] px-3 text-gray-500 text-white hover:text-black hover:bg-richblack-500 rounded-full transition duration-300"
+        >
           <ArrowBackIcon />
         </div>
-        <button className="py-3 px-6 bg-blue-400 hover:bg-blue-500 text-white rounded-md transition duration-300">
+        <button
+          onClick={() => setIndex((index + 1) % 5)}
+          className="py-3 px-6 bg-blue-400 hover:bg-blue-500 text-white rounded-md transition duration-300"
+        >
           Next session
         </button>
       </div>

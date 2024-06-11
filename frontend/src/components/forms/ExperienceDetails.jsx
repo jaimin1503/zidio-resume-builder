@@ -3,7 +3,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import "react-quill/dist/quill.snow.css"; // import styles for the editor
 import ReactQuill from "react-quill";
 
-export default function ExperienceDetails() {
+export default function ExperienceDetails({ index, setIndex }) {
   const [description, setDescription] = useState("");
 
   return (
@@ -66,7 +66,7 @@ export default function ExperienceDetails() {
               Start
             </label>
             <input
-              type="text"
+              type="date"
               className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
               id="start"
               placeholder="MM/YY"
@@ -77,7 +77,7 @@ export default function ExperienceDetails() {
               Finish
             </label>
             <input
-              type="text"
+              type="date"
               className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
               id="finish"
               placeholder="MM/YY"
@@ -99,14 +99,20 @@ export default function ExperienceDetails() {
           theme="snow"
           value={description}
           onChange={setDescription}
-          className="bg-gray-100"
+          className=" bg-white text-black"
         />
       </div>
       <div className="flex justify-between items-center mt-10">
-        <div className="cursor-pointer py-[0.7rem] px-3 text-gray-500 hover:text-black hover:bg-gray-200 rounded-full transition duration-300">
+        <div
+          onClick={() => setIndex(index - 1)}
+          className="cursor-pointer py-[0.7rem] px-3 text-gray-500 hover:text-black hover:bg-richblack-500 rounded-full transition duration-300"
+        >
           <ArrowBackIcon />
         </div>
-        <button className="py-3 px-6 bg-purple-600 hover:bg-purple-700 text-white rounded-md transition duration-300">
+        <button
+          onClick={() => setIndex((index + 1) % 5)}
+          className="py-3 px-6 bg-blue-400 hover:bg-blue-500 text-white rounded-md transition duration-300"
+        >
           Next session
         </button>
       </div>
