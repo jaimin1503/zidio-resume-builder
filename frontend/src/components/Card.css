@@ -1,0 +1,49 @@
+
+
+@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+.cardscont {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px auto; /* Center the cards */
+}
+
+.card {
+    width: calc(33.33% - 40px); /* Adjust width for 3 cards per row */
+    margin: 20px; /* Add space between cards */
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, background-color 0.2s;
+    background-color: white;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card:hover {
+    transform: scale(1.05);
+    background-color: #f0f0f0;
+}
+
+.card-text {
+    font-family: "Kanit", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+@media (max-width: 768px) {
+    .cardscont {
+        flex-direction: column; /* Change to column layout on smaller screens */
+        align-items: center; /* Center align the cards */
+    }
+
+    .card {
+        width: calc(100% - 40px); /* Full width for cards on smaller screens */
+    }
+}
