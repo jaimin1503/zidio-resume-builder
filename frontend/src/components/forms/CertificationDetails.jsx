@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import "react-quill/dist/quill.snow.css"; // import styles for react-quill
 import ReactQuill from "react-quill";
+import { useDispatch, useSelector } from "react-redux";
+import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
 
-export default function CertificationDetails({ index, setIndex }) {
+export default function CertificationDetails() {
+  const { globalIndex } = useSelector((state) => state.globalIndex);
+  const dispatch = useDispatch();
   const [description, setDescription] = useState("");
-
   const handleDescriptionChange = (value) => {
     setDescription(value);
   };
@@ -65,13 +68,13 @@ export default function CertificationDetails({ index, setIndex }) {
       </div>
       <div className="flex justify-between items-center mt-10">
         <div
-          onClick={() => setIndex(index - 1)}
+          onClick={() => dispatch(setGlobalIndex(globalIndex - 1))}
           className="cursor-pointer py-[0.7rem] px-3 text-gray-500 hover:text-black hover:bg-richblack-500 rounded-full transition duration-300"
         >
           <ArrowBackIcon />
         </div>
         <button
-          // onClick={() => setIndex((index + 1) % 5)}
+          // onClick={() => setGlobalIndex((globalIndex + 1) % 5)}
           className="py-3 px-6 bg-blue-400 hover:bg-blue-500 text-white rounded-md transition duration-300"
         >
           Finish

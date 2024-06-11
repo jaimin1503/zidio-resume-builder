@@ -1,6 +1,10 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useSelector, useDispatch } from "react-redux";
+import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
 
-export default function EducationDetails({ index, setIndex }) {
+export default function EducationDetails() {
+  const { globalIndex } = useSelector((state) => state.globalIndex);
+  const dispatch = useDispatch();
   return (
     <div className="p-6 h-full w-full bg-richblack-700 rounded-2xl shadow-lg text-black">
       <div className="flex justify-between items-center mb-6">
@@ -88,13 +92,13 @@ export default function EducationDetails({ index, setIndex }) {
       </div>
       <div className="flex justify-between items-center mt-10">
         <div
-          onClick={() => setIndex(index - 1)}
+          onClick={() => dispatch(setGlobalIndex(globalIndex - 1))}
           className="cursor-pointer py-[0.7rem] px-3 text-gray-500 text-white hover:text-black hover:bg-richblack-500 rounded-full transition duration-300"
         >
           <ArrowBackIcon />
         </div>
         <button
-          onClick={() => setIndex((index + 1) % 5)}
+          onClick={() => dispatch(setGlobalIndex((globalIndex + 1) % 5))}
           className="py-3 px-6 bg-blue-400 hover:bg-blue-500 text-white rounded-md transition duration-300"
         >
           Next session
