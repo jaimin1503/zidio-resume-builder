@@ -53,8 +53,6 @@ export const createResume = async (req, res) => {
     res.status(500).json({ message: "Server error, please try again later." });
   }
 };
-<<<<<<< Updated upstream
-=======
 
 export const editResume = async (req, res) => {
   try {
@@ -89,5 +87,4 @@ export const editResume = async (req, res) => {
     res.status(500).json({ message: "Server error, please try again later." });
   }
 };
-//Kausalya
->>>>>>> Stashed changes
+
