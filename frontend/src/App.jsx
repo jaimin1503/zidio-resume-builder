@@ -21,9 +21,7 @@ function App() {
         <Route path="/fillDetails" element={<FillDetails />} />
         <Route path="/templates" element={<Templates />} />
       </Routes>
-      {/* <Card /> */}
-      {/* <FAQ /> */}
-      {/* <Footer />  */}
+
     </div>
   );
 }

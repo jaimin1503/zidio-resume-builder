@@ -54,6 +54,7 @@ const ResumeSchema = new Schema({
   interests: [String],
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
+  hobbies: [String],
 });
 
 ResumeSchema.pre("save", function (next) {

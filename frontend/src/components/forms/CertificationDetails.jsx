@@ -4,6 +4,7 @@ import "react-quill/dist/quill.snow.css"; // import styles for react-quill
 import ReactQuill from "react-quill";
 import { useDispatch, useSelector } from "react-redux";
 import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
+import { Link } from "react-router-dom";
 
 export default function CertificationDetails() {
   const { globalIndex } = useSelector((state) => state.globalIndex);
@@ -73,12 +74,13 @@ export default function CertificationDetails() {
         >
           <ArrowBackIcon />
         </div>
-        <button
+        <Link
+          to={"/templates"}
           // onClick={() => setGlobalIndex((globalIndex + 1) % 5)}
           className="py-3 px-6 bg-blue-400 hover:bg-blue-500 text-white rounded-md transition duration-300"
         >
-          Finish
-        </button>
+          Select template
+        </Link>
       </div>
     </div>
   );
