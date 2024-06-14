@@ -20,7 +20,7 @@ const ResponsiveNavebar = ({ toggleDrawer, token, handleLogout }) => {
             </a>
           </li>
           <li className=" p-4 border-b flex">
-            <a className=" text-lg" href="/">
+            <a className=" text-lg" href="/templates">
               Templates
             </a>
           </li>

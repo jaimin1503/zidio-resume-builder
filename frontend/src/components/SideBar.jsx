@@ -9,6 +9,7 @@ import { setGlobalIndex } from "../redux/slices/globalIndexSlice";
 
 export default function SideBar() {
   const { globalIndex } = useSelector((state) => state.globalIndex);
+  const { formData } = useSelector((state) => state.formData);
   const dispatch = useDispatch();
   const menuItems = [
     { logo: PersonalInfo, text: "Personal Information" },
