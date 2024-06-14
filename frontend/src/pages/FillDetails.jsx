@@ -2,8 +2,15 @@ import { Link } from "react-router-dom";
 import SideBar from "../components/SideBar";
 import FormContainer from "../components/FormContainer";
 import { useState } from "react";
+import { Drawer } from "@mui/material";
+import { Box } from "@mui/material";
 
 export default function FillDetails() {
+  const [open, setOpen] = useState(false);
+
+  const toggleDrawer = (newOpen) => {
+    setOpen(newOpen);
+  };
   return (
     <div className=" text-white">
       {/* <div className="topBar h-[20vh] bg-blue-300 flex justify-between">
@@ -21,6 +28,16 @@ export default function FillDetails() {
         </div>
         <FormContainer />
       </div>
+      {/* <Drawer anchor="left" open={open} onClose={() => toggleDrawer(false)}>
+        <Box
+          sx={{
+            backgroundColor: "rgb(22 29 41)",
+            height: "100%",
+          }}
+        >
+          <SideBar toggleDrawer={toggleDrawer} />
+        </Box>
+      </Drawer> */}
     </div>
   );
 }
