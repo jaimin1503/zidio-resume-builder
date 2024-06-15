@@ -5,7 +5,7 @@ import img3 from "./assets/step3.png";
 
 const HowItWorks = () => {
   return (
-    <div className="text-center bg-black text-white p-10">
+    <div className="text-center bg-richblack-900 text-white px-10 py-20">
       <h1 className="text-5xl font-bold text-blue-300 mb-4">HOW IT WORKS</h1>
       <p className="text-xl mb-10">Simple Steps to Your Dream Job</p>
       <div className="flex flex-col lg:flex-row justify-around items-center">

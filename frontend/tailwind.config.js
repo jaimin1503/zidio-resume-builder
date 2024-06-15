@@ -122,7 +122,11 @@ export default {
         100: "#FF0000",
       },
     },
-    extend: {},
+    extend: {
+      inset: {
+        "-2": "-2px",
+      },
+    },
   },
   plugins: [],
 };

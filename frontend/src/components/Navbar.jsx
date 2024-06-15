@@ -1,6 +1,6 @@
 import Drawer from "@mui/material/Drawer";
 import { useEffect, useState } from "react";
-import ResponsiveNavebar from "./ResponsiveNavebar";
+import ResponsiveNavbar from "./ResponsiveNavbar";
 import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
@@ -31,68 +31,59 @@ export default function Navbar() {
 
   return (
     <>
-      <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
-        <Box
-          sx={{
-            backgroundColor: "rgb(22 29 41)",
-            height: "100%",
-          }}
-        >
-          <ResponsiveNavebar
-            token={token}
-            handleLogout={handleLogout}
-            toggleDrawer={toggleDrawer}
-          />
-        </Box>
-      </Drawer>
-      <div className=" flex items-center">
-        <Link to={"/"}>
-          <div className="left text-2xl lg:hidden font-bold text-blue-100 mx-4 cursor-pointer">
+      <div className="w-full h-18 py-3 flex justify-between sticky top-0 z-50  bg-richblack-900 border-b-[0.1px] border-pure-greys-25 px-10">
+        <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
+          <Box
+            sx={{
+              backgroundColor: "rgb(22 29 41)",
+              height: "100%",
+            }}
+          >
+            <ResponsiveNavbar
+              token={token}
+              handleLogout={handleLogout}
+              toggleDrawer={toggleDrawer}
+            />
+          </Box>
+        </Drawer>
+
+        <nav className="w-full flex items-center justify-between text-white">
+          <div className="left text-2xl font-bold text-blue-100 cursor-pointer">
             ResumeHub
           </div>
-        </Link>
-        <div
-          onClick={toggleDrawer(true)}
-          className=" text-white ml-auto p-4 cursor-pointer lg:hidden"
-        >
-          <FormatAlignRightIcon />
-        </div>
-      </div>
-      <div className=" text-white py-4 hidden lg:block">
-        <nav className=" flex items-center">
-          <div className="left text-2xl font-bold text-blue-100 mx-4 cursor-pointer">
-            ResumeHub
-          </div>
-          <div className="middle mx-auto font-medium">
+          <div className="middle font-medium hidden lg:block">
             <ul className=" flex gap-10 ">
-              <Link to={"/"}
-                className=" cursor-pointer hover:text-blue-100 text-lg"
+              <Link
+                to={"/"}
+                className=" cursor-pointer hover:text-blue-100 text-md font-light"
                 style={{ transition: "0.3s" }}
               >
                 Home
               </Link>
-              <Link to={"/templates"}
-                className=" cursor-pointer hover:text-blue-100 text-lg"
+              <Link
+                to={"/templates"}
+                className=" cursor-pointer hover:text-blue-100 text-md font-light"
                 style={{ transition: "0.3s" }}
               >
                 Templates
               </Link>
               <li
-                className=" cursor-pointer hover:text-blue-100 text-lg"
+                className=" cursor-pointer hover:text-blue-100 textmd font-light"
                 style={{ transition: "0.3s" }}
               >
                 JoinResumeHub
               </li>
-              <li
-                className=" cursor-pointer hover:text-blue-100 text-lg"
+              <Link
+                to={"/about"}
+                className=" cursor-pointer hover:text-blue-100 text-md font-light"
                 style={{ transition: "0.3s" }}
               >
                 About Us
-              </li>
+              </Link>
             </ul>
           </div>
           {!token ? (
-            <div className="right flex items-center mx-4">
+            <div className="right hidden lg:flex items-center mx-4">
               <Link to={"/login"} className="login">
                 <button
                   className=" mx-4 font-medium hover:text-blue-100"
@@ -117,6 +108,13 @@ export default function Navbar() {
               </button>
             </div>
           )}
+
+          <div
+            onClick={toggleDrawer(true)}
+            className=" text-white p-4 lg:hidden cursor-pointer"
+          >
+            <FormatAlignRightIcon />
+          </div>
         </nav>
       </div>
     </>
