@@ -3,9 +3,27 @@ import { Profile } from "../models/profileModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import zod from 'zod'
 dotenv.config();
 
+
+const signUpBody=zod.object({
+  firstName:zod.string(),
+  lastName:zod.string(),
+  email:zod.string().email(),
+  password:zod.string(),
+  userName:zod.string(),
+})
+
 export const signup = async (req, res) => {
+  const {success}=signUpBody.safeParse(req.body);
+
+if(!success){
+    return res.status(411).json({
+        message:"incorrect inputs"
+    })
+}
+
   try {
     const { firstName, lastName, email, password, userName } = req.body;
     if (!firstName || !lastName || !email || !password || !userName) {
@@ -102,7 +120,20 @@ export const signup = async (req, res) => {
   }
 };
 
+const signInBody=zod.object({
+  identifier:zod.string() || zod.string().email(),
+  password:zod.string()
+})
+
 export const login = async (req, res) => {
+  const {data,error}=signInBody.safeParse(req.body);
+
+  if(error){
+      return res.status(411).json({
+          message:"Inorrect inputs on signin"
+      })
+  }
+
   try {
     const { identifier, password } = req.body;
     if (!identifier || !password) {
