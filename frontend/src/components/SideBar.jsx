@@ -23,10 +23,10 @@ export default function SideBar({ toggleDrawer }) {
 
   return (
     <div className="rounded-2xl flex flex-col justify-center items-center bg-richblack-700 w-[379px] h-[90vh] shadow-lg">
-      <CloseIcon
+      {/* <CloseIcon
         onClick={() => toggleDrawer(false)}
         className="cursor-pointer"
-      />
+      /> */}
       {menuItems.map((item, index) => (
         <div
           key={index}
