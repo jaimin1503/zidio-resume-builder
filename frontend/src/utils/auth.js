@@ -15,7 +15,7 @@ export function signUp(formData, navigate) {
           console.log(res.data.message);
           dispatch(setSignupData(res.data.user));
           dispatch(setToken(res.data.token));
-          navigate("/");
+          navigate("/login");
           toast.success("Signup successfull 🎉");
         });
     } catch (error) {
