@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setGlobalIndex } from "../redux/slices/globalIndexSlice";
 import { setFormData } from "../redux/slices/resumeSlice.js";
 import CloseIcon from "@mui/icons-material/Close";
+import AddSection from "./assets/AddSection.jsx"; 
 
 export default function SideBar({ toggleDrawer }) {
   const { globalIndex } = useSelector((state) => state.globalIndex);
@@ -19,6 +20,7 @@ export default function SideBar({ toggleDrawer }) {
     { logo: Experience, text: "Experience" },
     { logo: Contact, text: "Contact Information" },
     { logo: Certification, text: "Award/Certification" },
+    { logo: AddSection ,text:"Add Section"},
   ];
 
   return (
@@ -42,8 +44,4 @@ export default function SideBar({ toggleDrawer }) {
       ))}
     </div>
   );
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes
