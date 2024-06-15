@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import "./Styles.css";
+import Navbar from "../components/Navbar";
 
 export default function Login() {
   const [formData, setFormData] = useState({});
@@ -51,6 +52,7 @@ export default function Login() {
 
   return (
     <>
+      <Navbar />
       <div className=" text-white w-fit mx-auto md:border-2 max-w-lg border-blue-300 rounded-2xl p-10 mt-20">
         <h1 className="text-3xl sm:text-4xl font-medium text-center mb-10">
           Login to "Resume-Builder"
