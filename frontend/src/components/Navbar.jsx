@@ -65,13 +65,15 @@ export default function Navbar() {
           </div>
           <div className="middle mx-auto font-medium">
             <ul className=" flex gap-10 ">
-              <Link to={"/"}
+              <Link
+                to={"/"}
                 className=" cursor-pointer hover:text-blue-100 text-lg"
                 style={{ transition: "0.3s" }}
               >
                 Home
               </Link>
-              <Link to={"/templates"}
+              <Link
+                to={"/templates"}
                 className=" cursor-pointer hover:text-blue-100 text-lg"
                 style={{ transition: "0.3s" }}
               >

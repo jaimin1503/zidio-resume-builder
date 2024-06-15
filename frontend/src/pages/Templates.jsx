@@ -1,8 +1,10 @@
+import Navbar from "../components/Navbar";
 import Template1 from "../components/templates/Template1";
 
 export default function Templates() {
   return (
     <>
+      <Navbar />
       <div className=" p-6 text-white">
         <h1 className=" text-4xl p-4 font-bold ">
           Select your resume template

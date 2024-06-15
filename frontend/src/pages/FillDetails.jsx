@@ -4,6 +4,7 @@ import FormContainer from "../components/FormContainer";
 import { useState } from "react";
 import { Drawer } from "@mui/material";
 import { Box } from "@mui/material";
+import Navbar from "../components/Navbar";
 
 export default function FillDetails() {
   const [open, setOpen] = useState(false);
@@ -12,8 +13,10 @@ export default function FillDetails() {
     setOpen(newOpen);
   };
   return (
-    <div className=" text-white">
-      {/* <div className="topBar h-[20vh] bg-blue-300 flex justify-between">
+    <>
+      <Navbar />
+      <div className=" text-white">
+        {/* <div className="topBar h-[20vh] bg-blue-300 flex justify-between">
         <h1 className=" font-bold text-3xl text-whit px-10 py-10">ResumeHub</h1>
         <Link
           to={"/templates"}
@@ -22,13 +25,13 @@ export default function FillDetails() {
           ChangeTemplate
         </Link>
       </div> */}
-      <div className=" flex w-screen">
-        <div className=" hidden lg:block">
-          <SideBar />
+        <div className=" flex w-screen">
+          <div className=" hidden lg:block">
+            <SideBar />
+          </div>
+          <FormContainer />
         </div>
-        <FormContainer />
-      </div>
-      {/* <Drawer anchor="left" open={open} onClose={() => toggleDrawer(false)}>
+        {/* <Drawer anchor="left" open={open} onClose={() => toggleDrawer(false)}>
         <Box
           sx={{
             backgroundColor: "rgb(22 29 41)",
@@ -38,6 +41,7 @@ export default function FillDetails() {
           <SideBar toggleDrawer={toggleDrawer} />
         </Box>
       </Drawer> */}
-    </div>
+      </div>
+    </>
   );
 }
