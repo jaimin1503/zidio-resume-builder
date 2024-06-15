@@ -42,4 +42,8 @@ export default function SideBar({ toggleDrawer }) {
       ))}
     </div>
   );
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes
