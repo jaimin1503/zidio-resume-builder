@@ -8,7 +8,6 @@ import Navbar from "../components/Navbar";
 export default function Home() {
   return (
     <>
-      <Navbar />
       <div className="row1 my-10">
         <HomepageHero />
         <Card />
