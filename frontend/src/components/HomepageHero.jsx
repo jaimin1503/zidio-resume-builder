@@ -5,7 +5,7 @@ export default function HomepageHero() {
   return (
     <>
       <div className="container flex flex-col lg:flex-row justify-center mx-auto">
-        <div className="text-section p-4 flex flex-col justify-center text-wrap ">
+        <div className="text-section sm:p-4 flex flex-col justify-center text-wrap ">
           <p className=" text-2xl font-medium uppercase text-pure-greys-300 mx-10">
             Create a Professional Resume in Minutes
           </p>

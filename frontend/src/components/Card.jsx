@@ -3,7 +3,6 @@ import "./Card.css";
 import cvImage from "../assets/cvimage.png";
 import fillintheblank from "../assets/fillintheblank.jpg";
 import design from "../assets/design.png";
-// import cvImage from "../assets/cvimage.png";
 
 const Card = () => {
   useEffect(() => {
@@ -23,6 +22,7 @@ const Card = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   return (
     <div className="container cardscont">
       <div className="card" style={{ width: "20rem" }}>
@@ -53,11 +53,10 @@ const Card = () => {
           src={design}
           className="card-img-top"
           alt="Card image cap"
-          x
           style={{ height: "388px" }}
         />
         <div className="card-body">
-          <h4>Customize your document.</h4>
+          <h4>Customize your document</h4>
           <p className="card-text">
             Make it truly yours. Uniqueness in a few clicks.
           </p>

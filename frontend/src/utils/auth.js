@@ -8,7 +8,7 @@ export function signUp(formData, navigate) {
     const toastId = toast.loading("Loading...");
     try {
       await axios
-        .post(`http://localhost:5555/user/signup`, formData, {
+        .post(`${import.meta.env.VITE_BASE_URL}/user/signup`, formData, {
           withCredentials: true,
         })
         .then((res) => {

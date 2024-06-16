@@ -22,7 +22,7 @@ export default function Login() {
     // Send a POST request to the server
     try {
       const response = await axios.post(
-        `http://localhost:5555/user/login`,
+        `${import.meta.env.VITE_BASE_URL}/user/login`,
         formData,
         { withCredentials: true }
       );
@@ -57,7 +57,7 @@ export default function Login() {
         <h1 className="text-3xl sm:text-4xl font-medium text-center mb-10">
           Login to "Resume-Builder"
         </h1>
-        {error && <div className="text-red-500 mb-4">{error}</div>}
+        {error && <div className=" text-red-100 mb-4">{error}</div>}
         <form onSubmit={handleSubmit}>
           <input
             className="input-field bg-black"

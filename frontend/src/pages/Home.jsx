@@ -6,9 +6,10 @@ import HowItWorks from "../components/HowItWorks";
 import Navbar from "../components/Navbar";
 
 export default function Home() {
+
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <div className="row1 my-10">
         <HomepageHero />
         <Card />
