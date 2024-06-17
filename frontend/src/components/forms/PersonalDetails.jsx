@@ -1,8 +1,12 @@
+import  { useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useSelector, useDispatch } from "react-redux";
 import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
+import "react-quill/dist/quill.snow.css"; // import styles for the editor
+import ReactQuill from "react-quill";
 
 export default function PersonalDetails() {
+  const [description, setDescription] = useState("");
   const { globalIndex } = useSelector((state) => state.globalIndex);
   const dispatch = useDispatch();
   return (
@@ -89,6 +93,20 @@ export default function PersonalDetails() {
             placeholder="123789"
           />
         </div>
+        <br/>
+        <div className="mt-6">
+      <label htmlFor="description" className="text-gray-700 font-medium mb-2">
+    Professional Summary 
+      </label>
+      <ReactQuill
+        theme="snow"
+        value={description}
+        onChange={setDescription}
+        className="bg-white text-black"
+        style={{ width: '1500px', height: '150px' }}
+      />
+     </div>
+      <br/>
       </div>
       <div className="flex justify-between items-center mt-10">
         <div className=" py-[0.7rem] px-3 text-gray-500 hover:text-black hover:bg-gray-200 rounded-full transition duration-300 cursor-not-allowed">
