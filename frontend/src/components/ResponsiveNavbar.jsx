@@ -1,7 +1,7 @@
 import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
 
-const ResponsiveNavebar = ({ toggleDrawer, token, handleLogout }) => {
+const ResponsiveNavbar = ({ toggleDrawer, token, handleLogout }) => {
   return (
     <>
       <div className=" p-4 w-full flex justify-end text-white">
@@ -67,4 +67,4 @@ const ResponsiveNavebar = ({ toggleDrawer, token, handleLogout }) => {
     </>
   );
 };
-export default ResponsiveNavebar;
+export default ResponsiveNavbar;
