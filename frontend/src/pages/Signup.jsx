@@ -1,3 +1,4 @@
+
 import "./Styles.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -31,11 +32,10 @@ export default function Signup() {
   };
 
   return (
-    <>
-      <Navbar />
-      <div className=" text-white w-fit mx-auto md:border-2 max-w-lg border-blue-300 rounded-2xl p-10 mt-20">
+    <div className="w-full h-full flex justify-center items-center text-white bg-richblack-900 px-10 py-96">
+      <div className="w-full lg:w-1/2 h-auto border border-blue-300 rounded-2xl px-10 py-10">
         <h1 className="text-3xl sm:text-4xl font-medium text-center mb-10">
-          SignUp to "Resume-Builder"
+          SignUp to ResumeHub
         </h1>
         {error && <div className="text-red-500 mb-4">{error}</div>}
         <form onSubmit={handleSubmit}>
@@ -95,6 +95,6 @@ export default function Signup() {
           </a>
         </div>
       </div>
-    </>
+    </div>
   );
 }

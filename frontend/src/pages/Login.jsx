@@ -51,11 +51,10 @@ export default function Login() {
   };
 
   return (
-    <>
-      <Navbar />
-      <div className=" text-white w-fit mx-auto md:border-2 max-w-lg border-blue-300 rounded-2xl p-10 mt-20">
+    <div className="w-full h-full flex justify-center items-center bg-richblack-900 px-10 py-20">
+      <div className="text-white w-full lg:w-1/2 h-auto border border-blue-300 rounded-2xl p-10">
         <h1 className="text-3xl sm:text-4xl font-medium text-center mb-10">
-          Login to "Resume-Builder"
+          Login to ResumeBuilder
         </h1>
         {error && <div className=" text-red-100 mb-4">{error}</div>}
         <form onSubmit={handleSubmit}>
@@ -92,6 +91,6 @@ export default function Login() {
           </a>
         </div>
       </div>
-    </>
+    </div>
   );
 }

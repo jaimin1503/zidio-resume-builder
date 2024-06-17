@@ -28,7 +28,7 @@ export default function FormContainer() {
       {/* <div>
         <img className=" m-5 cursor-pointer" src={openIcon} alt="" />
       </div> */}
-      <div className="w-full m-5 bg-richblack-700 rounded-2xl sm:m-10 lg:mx-10">
+      <div className="w-full m-5 bg-richblack-900 rounded-2xl sm:m-10 lg:mx-10">
         <FormComponent />
       </div>
     </>

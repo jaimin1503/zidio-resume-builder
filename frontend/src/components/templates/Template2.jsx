@@ -1,128 +1,60 @@
+import React from "react";
 
-
-function Template2() {
+const Template2 = () => {
   return (
-    <div
-      className="bg-white shadow-lg rounded-lg overflow-hidden"
-      style={{ width: "210mm", height: "297mm" }}
-    >
-      <div className="flex flex-col h-full p-8">
-        {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <h1 className="text-4xl font-bold text-gray-900">JONATHAN PATTERSON</h1>
-            <p className="text-lg text-gray-600">GRAPHIC DESIGNER</p>
-          </div>
-          <div className="text-right">
-            <p className="mb-2">123-456-7890</p>
-            <p className="mb-2">hello@reallygreatsite.com</p>
-            <p className="mb-2">www.reallygreatsite.com</p>
-            <p>123 Anywhere St., Any City</p>
-          </div>
+    <>
+      <p>Template 2</p>
+      <div className="bg-white text-black shadow-lg rounded-lg overflow-hidden p-6 w-full h-full">
+        <div className="text-center mb-6">
+          <h1 className="text-3xl font-bold text-blue-500">Jane Smith</h1>
+          <p className="text-lg text-gray-600">Marketing Specialist</p>
         </div>
-        <hr />
-        {/* Profile */}
-        <div className="mb-8 mt-4">
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">PROFILE</h2>
-          <p className="text-gray-700">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-            sagittis pretium nisl, nec commodo est. Fusce laoreet consequat
-            sapien, eu fermentum ex pulvinar eget. Praesent hendrerit nulla in
-            varius pharetra. Fusce facilisis venenatis lacus in lobortis.
-            Fusce vulputate iaculis mauris. Nunc risus arcu, tempor vel
-            dignissim porta, vulputate id quam.
-          </p>
-        </div>
-        <hr />
-        {/* Work Experience */}
-        <div className="mb-8 mt-4">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">WORK EXPERIENCE</h2>
-          <div className="mb-6">
-            <h3 className="text-xl font-semibold text-gray-900">Your Job Position here</h3>
-            <p className="text-gray-600">Company name | 2020-2022</p>
-            <ul className="list-disc list-inside text-gray-700 mt-2">
-              <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-              <li>Fusce laoreet consequat sapien, eu fermentum ex pulvinar eget.</li>
-              <li>Praesent hendrerit nulla in varius pharetra.</li>
-              <li>Nunc risus arcu, tempor vel dignissim porta, vulputate id quam.</li>
-            </ul>
+        <div className="flex flex-col lg:flex-row mb-6">
+          <div className="lg:w-1/2 pr-4 mb-4 lg:mb-0">
+            <h2 className="text-lg font-bold">Profile</h2>
+            <p className="text-gray-700">
+              Results-driven marketing specialist with 5+ years of experience in
+              digital marketing campaigns and content strategy.
+            </p>
           </div>
-          <div>
-            <h3 className="text-xl font-semibold text-gray-900">Your Job Position here</h3>
-            <p className="text-gray-600">Company name | 2020-2022</p>
-            <ul className="list-disc list-inside text-gray-700 mt-2">
-              <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-              <li>Fusce laoreet consequat sapien, eu fermentum ex pulvinar eget.</li>
-              <li>Praesent hendrerit nulla in varius pharetra.</li>
-              <li>Nunc risus arcu, tempor vel dignissim porta, vulputate id quam.</li>
+          <div className="lg:w-1/2 pl-4">
+            <h2 className="text-lg font-bold">Skills</h2>
+            <ul className="list-disc list-inside text-gray-700">
+              <li>SEO, SEM</li>
+              <li>Content Marketing</li>
+              <li>Social Media Management</li>
             </ul>
           </div>
         </div>
-        <hr />
-        {/* Education */}
-        <div className="mb-8 mt-4">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">EDUCATION</h2>
+        <div className="mb-6">
+          <h2 className="text-lg font-bold">Experience</h2>
           <div className="mb-4">
-            <h3 className="text-xl font-semibold text-gray-900">Your Degree Name</h3>
-            <p>Your Institution Name</p>
-            <p className="text-gray-600">2016-2018</p>
-            <p className="text-gray-700">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </p>
+            <h3 className="font-bold">Marketing Manager</h3>
+            <p>XYZ Corporation - 2018-Present</p>
+            <ul className="list-disc list-inside text-gray-700">
+              <li>Developed and executed digital marketing strategies.</li>
+              <li>Managed social media platforms and campaigns.</li>
+            </ul>
           </div>
           <div>
-            <h3 className="text-xl font-semibold text-gray-900">Your Degree Name</h3>
-            <p>Your Institution Name</p>
-            <p className="text-gray-600">2016-2018</p>
-            <p className="text-gray-700">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </p>
+            <h3 className="font-bold">Content Strategist</h3>
+            <p>ABC Marketing - 2015-2018</p>
+            <ul className="list-disc list-inside text-gray-700">
+              <li>Created engaging content for online and offline channels.</li>
+              <li>Analyzed campaign performance and optimized strategies.</li>
+            </ul>
           </div>
         </div>
-        <hr />
-        {/* Skills and Languages */}
-        <div className="flex mb-8 mt-4">
-          <div className="w-1/2">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">SKILLS</h2>
-            <p className="mb-2">Skill name here</p>
-            <p className="mb-2">Your Skill</p>
-            <p className="mb-2">Special skills</p>
-            <p className="mb-8">List your skills</p>
-          </div>
-          <div className="w-1/2">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">LANGUAGES</h2>
-            <p className="mb-0">English</p>
-            <p className="mb-0">German</p>
-            <p className="mb-0">Spanish</p>
-          </div>
-        </div>
-        <hr />
-        {/* Certificates and Hobbies */}
-        <div className="flex mb-8 mt-4">
-          <div className="w-1/2">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">CERTIFICATES</h2>
-            <div className="mb-4">
-              <h3 className="text-lg font-semibold">Certificate Name</h3>
-              <p>Issuing Organization</p>
-              <p className="text-gray-600">Date Issued</p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold">Certificate Name</h3>
-              <p>Issuing Organization</p>
-              <p className="text-gray-600">Date Issued</p>
-            </div>
-          </div>
-          <div className="w-1/2">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">HOBBIES</h2>
-            <p className="mb-0">Hobby 1</p>
-            <p className="mb-0">Hobby 2</p>
-            <p className="mb-0">Hobby 3</p>
-            <p className="mb-0">Hobby 4</p>
+        <div className="mb-6">
+          <h2 className="text-lg font-bold">Education</h2>
+          <div>
+            <h3 className="font-bold">Master of Business Administration</h3>
+            <p>ABC University - 2014-2016</p>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
-}
+};
 
 export default Template2;
