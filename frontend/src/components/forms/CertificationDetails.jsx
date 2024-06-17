@@ -79,7 +79,7 @@ export default function CertificationDetails() {
           // onClick={() => setGlobalIndex((globalIndex + 1) % 5)}
           className="py-3 px-6 bg-blue-400 hover:bg-blue-500 text-white rounded-md transition duration-300"
         >
-          Select template
+        Next
         </Link>
       </div>
     </div>

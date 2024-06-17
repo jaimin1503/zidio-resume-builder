@@ -3,6 +3,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CloseIcon from '@mui/icons-material/Close'; // Import close icon
 import 'react-quill/dist/quill.snow.css'; // import styles for react-quill
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
 import { setGlobalIndex } from '../../redux/slices/globalIndexSlice';
 export default function CertificationDetails() {
   const { globalIndex } = useSelector((state) => state.globalIndex);
@@ -438,11 +439,13 @@ export default function CertificationDetails() {
           >
             <ArrowBackIcon />
           </div>
-          <button
-            className="py-3 px-6 bg-blue-400 hover:bg-blue-500 text-white rounded-md transition duration-300"
-          >
-            Finish
-          </button>
+          <Link
+          to={"/templates"}
+          // onClick={() => setGlobalIndex((globalIndex + 1) % 5)}
+          className="py-3 px-6 bg-blue-400 hover:bg-blue-500 text-white rounded-md transition duration-300"
+        >
+          Select template
+        </Link>
         </div>
         {isPopupOpen && (
   <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 flex items-center justify-center">
