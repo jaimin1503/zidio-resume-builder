@@ -24,8 +24,8 @@ const Card = () => {
   }, []);
 
   return (
-    <div className="container cardscont">
-      <div className="card" style={{ width: "20rem" }}>
+    <div className="cardscont bg-richblack-900">
+      <div className="card">
         <img src={cvImage} className="card-img-top" alt="Card image cap" />
         <div className="card-body">
           <h4>Pick a CV template</h4>
@@ -34,12 +34,11 @@ const Card = () => {
           </p>
         </div>
       </div>
-      <div className="card" style={{ width: "20rem" }}>
+      <div className="card">
         <img
           src={fillintheblank}
           className="card-img-top"
           alt="Card image cap"
-          style={{ height: "388px" }}
         />
         <div className="card-body">
           <h4>Fill in the blanks</h4>
