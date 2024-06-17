@@ -8,9 +8,8 @@ const Footer = () => {
         <div className="footer-section about">
           <h2 className="text-xl font-bold text-blue-200">About Us</h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-            mattis pretium massa, at cursus turpis convallis sed.
-          </p>
+         ResumeHub is a open source Resume Builder.Build your own resume with our ResumeHub.       
+            </p>
         </div>
         <div className="footer-section links">
           <h2 className="text-xl font-bold text-blue-200">Quick Links</h2>

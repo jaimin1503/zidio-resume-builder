@@ -5,6 +5,7 @@ import EducationDetails from "./forms/EducationDetails";
 import ExperienceDetails from "./forms/ExperienceDetails";
 import PersonalDetails from "./forms/PersonalDetails";
 import { useSelector } from "react-redux";
+import AddSection from "./forms/AddSection";
 import openIcon from "../assets/openIcon.svg";
 
 const formComponents = [
@@ -13,7 +14,10 @@ const formComponents = [
   ExperienceDetails,
   ContactDetails,
   CertificationDetails,
+  AddSection,
 ];
+
+// hello kausalya
 
 export default function FormContainer() {
   const { globalIndex } = useSelector((state) => state.globalIndex);

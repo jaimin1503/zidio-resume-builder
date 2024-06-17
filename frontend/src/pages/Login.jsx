@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import "./Styles.css";
+import Navbar from "../components/Navbar";
 
 export default function Login() {
   const [formData, setFormData] = useState({});
@@ -21,7 +22,7 @@ export default function Login() {
     // Send a POST request to the server
     try {
       const response = await axios.post(
-        `http://localhost:5555/user/login`,
+        `${import.meta.env.VITE_BASE_URL}/user/login`,
         formData,
         { withCredentials: true }
       );
@@ -51,11 +52,12 @@ export default function Login() {
 
   return (
     <>
+      <Navbar />
       <div className=" text-white w-fit mx-auto md:border-2 max-w-lg border-blue-300 rounded-2xl p-10 mt-20">
         <h1 className="text-3xl sm:text-4xl font-medium text-center mb-10">
           Login to "Resume-Builder"
         </h1>
-        {error && <div className="text-red-500 mb-4">{error}</div>}
+        {error && <div className=" text-red-100 mb-4">{error}</div>}
         <form onSubmit={handleSubmit}>
           <input
             className="input-field bg-black"
