@@ -13,9 +13,7 @@ import AboutUs from "./pages/AboutUs";
 
 function App() {
   return (
-
-    <div className="w-screen min-w-full min-h-screen">
- 
+    <div className="w-screen min-w-full min-h-screen bg-richblack-900">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

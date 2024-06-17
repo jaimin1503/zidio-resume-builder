@@ -22,7 +22,7 @@ const Features = () => {
   ];
 
   return (
-    <div className="text-center bg-white text-blue-300 w-full py-20 px-10 h-full relative">
+    <div className="text-center text-blue-300 w-full py-20 px-10 h-full relative bg-richblack-900">
       <h1 className="text-5xl font-bold text-richblack-900 mb-20 px-10">
         FEATURES
       </h1>

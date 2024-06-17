@@ -47,10 +47,6 @@ const Card = () => {
           </p>
         </div>
       </div>
-// <<<<<<< main
-//       <div className="card">
-//         <img src={design} className="card-img-top" alt="Card image cap" x />
-// =======
       <div className="card" style={{ width: "20rem" }}>
         <img
           src={design}
@@ -58,7 +54,6 @@ const Card = () => {
           alt="Card image cap"
           style={{ height: "388px" }}
         />
-// >>>>>>> main
         <div className="card-body">
           <h4>Customize your document</h4>
           <p className="card-text">
