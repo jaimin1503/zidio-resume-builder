@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import "react-quill/dist/quill.snow.css"; // import styles for react-quill
 import ReactQuill from "react-quill";
@@ -79,7 +79,7 @@ export default function CertificationDetails() {
           // onClick={() => setGlobalIndex((globalIndex + 1) % 5)}
           className="py-3 px-6 bg-blue-400 hover:bg-blue-500 text-white rounded-md transition duration-300"
         >
-          Select template
+        Next
         </Link>
       </div>
     </div>

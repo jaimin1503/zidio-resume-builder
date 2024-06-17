@@ -1,5 +1,3 @@
-import React from "react";
-
 function Template1() {
   return (
     <div
