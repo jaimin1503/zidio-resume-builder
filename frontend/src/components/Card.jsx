@@ -3,7 +3,6 @@ import "./Card.css";
 import cvImage from "../assets/cvimage.png";
 import fillintheblank from "../assets/fillintheblank.jpg";
 import design from "../assets/design.png";
-// import cvImage from "../assets/cvimage.png";
 
 const Card = () => {
   useEffect(() => {
@@ -23,6 +22,7 @@ const Card = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   return (
     <div className="cardscont bg-richblack-900">
       <div className="card">
@@ -47,10 +47,20 @@ const Card = () => {
           </p>
         </div>
       </div>
-      <div className="card">
-        <img src={design} className="card-img-top" alt="Card image cap" x />
+// <<<<<<< main
+//       <div className="card">
+//         <img src={design} className="card-img-top" alt="Card image cap" x />
+// =======
+      <div className="card" style={{ width: "20rem" }}>
+        <img
+          src={design}
+          className="card-img-top"
+          alt="Card image cap"
+          style={{ height: "388px" }}
+        />
+// >>>>>>> main
         <div className="card-body">
-          <h4>Customize your document.</h4>
+          <h4>Customize your document</h4>
           <p className="card-text">
             Make it truly yours. Uniqueness in a few clicks.
           </p>

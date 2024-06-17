@@ -56,6 +56,7 @@ export default function Navbar() {
               <Link
                 to={"/"}
                 className=" cursor-pointer hover:text-blue-100 text-md font-light"
+
                 style={{ transition: "0.3s" }}
               >
                 Home
