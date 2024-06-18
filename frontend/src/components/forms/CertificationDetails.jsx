@@ -4,14 +4,40 @@ import "react-quill/dist/quill.snow.css"; // import styles for react-quill
 import ReactQuill from "react-quill";
 import { useDispatch, useSelector } from "react-redux";
 import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
-import { Link } from "react-router-dom";
+import { setFormData } from "../../redux/slices/resumeSlice"; // Import setFormData action
+import { Link, useParams } from "react-router-dom";
 
 export default function CertificationDetails() {
   const { globalIndex } = useSelector((state) => state.globalIndex);
+  const { formData: Details } = useSelector((state) => state.resume);
+  const { index } = useParams();
   const dispatch = useDispatch();
-  const [description, setDescription] = useState("");
+  const [formDetails, setFormDetails] = useState({
+    organization: "",
+    title: "",
+    date: "",
+    description: "",
+  });
+
+  const handleChange = (e) => {
+    setFormDetails((prv) => ({ ...prv, [e.target.name]: e.target.value }));
+  };
+
   const handleDescriptionChange = (value) => {
-    setDescription(value);
+    setFormDetails((prevState) => ({
+      ...prevState,
+      description: value,
+    }));
+  };
+
+  const handleNext = () => {
+    console.log("submited");
+    const newdata = {
+      ...formDetails,
+      ...Details.details,
+      Description: description,
+    };
+    dispatch(setFormData(newdata));
   };
 
   return (
@@ -32,6 +58,8 @@ export default function CertificationDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="organization"
             placeholder="Steve Jobs Designers"
+            value={formDetails.organization}
+            onChange={handleChange}
           />
         </div>
         <div className="flex flex-col">
@@ -43,6 +71,8 @@ export default function CertificationDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="title"
             placeholder="La Michael Angelo Award"
+            value={formDetails.title}
+            onChange={handleChange}
           />
         </div>
         <div className="flex flex-col">
@@ -54,6 +84,8 @@ export default function CertificationDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="date"
             placeholder="03/03/1998"
+            value={formDetails.date}
+            onChange={handleChange}
           />
         </div>
       </div>
@@ -61,10 +93,10 @@ export default function CertificationDetails() {
         <h2 className="text-white font-medium mb-2">Description</h2>
         <ReactQuill
           theme="snow"
-          value={description}
+          value={formDetails.description}
           onChange={handleDescriptionChange}
           placeholder="Enter description..."
-          className=" bg-white text-black"
+          className="bg-white text-black"
         />
       </div>
       <div className="flex justify-between items-center mt-10">
@@ -75,11 +107,11 @@ export default function CertificationDetails() {
           <ArrowBackIcon />
         </div>
         <Link
-          to={"/templates"}
-          // onClick={() => setGlobalIndex((globalIndex + 1) % 5)}
+          to={`/viewResume/${index}`}
+          onClick={handleNext}
           className="py-3 px-6 bg-blue-400 hover:bg-blue-500 text-white rounded-md transition duration-300"
         >
-        Next
+          Next
         </Link>
       </div>
     </div>

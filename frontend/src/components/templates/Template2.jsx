@@ -4,7 +4,7 @@ const Template2 = () => {
   return (
     <>
       <p>Template 2</p>
-      <div className="bg-white text-black shadow-lg rounded-lg overflow-hidden p-6 w-full h-full">
+      <div className="bg-white text-black shadow-lg rounded-lg overflow-hidden p-6 w-[210mm] h-[297mm]">
         <div className="text-center mb-6">
           <h1 className="text-3xl font-bold text-blue-500">Jane Smith</h1>
           <p className="text-lg text-gray-600">Marketing Specialist</p>

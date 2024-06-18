@@ -4,7 +4,7 @@ function Template1() {
   return (
     <>
       <p>Template 1</p>
-      <div className="bg-white text-black shadow-lg rounded-lg overflow-hidden w-full h-full flex flex-col lg:flex-row">
+      <div className="bg-white text-black shadow-lg rounded-lg overflow-hidden flex flex-col lg:flex-row w-[210mm] h-[297mm]">
         <div className="bg-gray-200 p-4 lg:w-1/3 flex flex-col">
           <div className="mb-4">
             <h2 className="text-lg font-semibold">CONTACT</h2>

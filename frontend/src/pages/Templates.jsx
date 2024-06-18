@@ -19,7 +19,7 @@ export default function Templates() {
       <div className="w-full flex flex-wrap justify-items-start">
         {templates.map((template, index) => (
           <div key={index} className="m-4">
-            <Link to={`/fillDetails`}>
+            <Link to={`/fillDetails/${index}`}>
               <img
                 src={template.src}
                 alt={template.alt}

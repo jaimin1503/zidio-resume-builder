@@ -11,13 +11,13 @@ const resumeSlice = createSlice({
   name: "resume",
   initialState,
   reducers: {
-    setResume(state, value) {
-      state.resume = value.payload;
+    setResume(state, action) {
+      state.resume = action.payload;
     },
-    setFormData(state, value) {
-      state.formData = value.payload;
+    setFormData(state, action) {
+      state.formData = action.payload;
     },
   },
 });
-export const { setResume,setFormData } = resumeSlice.actions;
+export const { setResume, setFormData } = resumeSlice.actions;
 export default resumeSlice.reducer;
