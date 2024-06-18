@@ -16,11 +16,6 @@ export default function ViewResume() {
     <div className=" text-white p-3 sm:p-6">
       <h1 className=" text-4xl font-bold ">Resume Preview</h1>
       <TemplateComponent />
-      <Template1 />
-      <Template2 />
-      <Template3 />
-      <Template4 />
-      <Template5 />
     </div>
   );
 }

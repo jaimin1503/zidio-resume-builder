@@ -1,7 +1,7 @@
 function Template5() {
   return (
     <div
-      className=" shadow-lg rounded-lg overflow-hidden"
+      className=" shadow-lg rounded-lg overflow-hidden bg-white text-black"
       style={{ width: "210mm", height: "297mm" }}
     >
       <div className="flex flex-col h-full p-8">
