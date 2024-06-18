@@ -6,6 +6,7 @@ import Template2 from "../components/templates/Template2";
 import Template3 from "../components/templates/Template3";
 
 export default function Templates() {
+
   return (
     <>
       <div className="w-full bg-richblack-900 px-10 py-20 text-white flex flex-col justify-center">
