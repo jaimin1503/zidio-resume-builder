@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import "./Card.css";
 import cvImage from "../assets/cvimage.png";
@@ -47,13 +48,8 @@ const Card = () => {
           </p>
         </div>
       </div>
-      <div className="card" style={{ width: "20rem" }}>
-        <img
-          src={design}
-          className="card-img-top"
-          alt="Card image cap"
-          style={{ height: "388px" }}
-        />
+      <div className="card">
+        <img src={design} className="card-img-top" alt="Card image cap" />
         <div className="card-body">
           <h4>Customize your document</h4>
           <p className="card-text">

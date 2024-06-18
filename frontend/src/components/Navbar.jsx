@@ -1,3 +1,4 @@
+
 import Drawer from "@mui/material/Drawer";
 import { useEffect, useState } from "react";
 import ResponsiveNavbar from "./ResponsiveNavbar";
@@ -31,7 +32,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="w-full h-18 py-3 flex justify-between sticky top-0 z-50  bg-richblack-900 border-b-[0.1px] border-pure-greys-25 px-10">
+      <div className="w-full h-18 py-3 flex justify-between sticky top-0 z-50  bg-richblack-900 border-b-[0.1px] border-pure-greys-25 px-6 lg:px-10">
         <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
           <Box
             sx={{
@@ -56,7 +57,6 @@ export default function Navbar() {
               <Link
                 to={"/"}
                 className=" cursor-pointer hover:text-blue-100 text-md font-light"
-
                 style={{ transition: "0.3s" }}
               >
                 Home
@@ -67,6 +67,13 @@ export default function Navbar() {
                 style={{ transition: "0.3s" }}
               >
                 Templates
+              </Link>
+              <Link
+                to={"/myresumes"}
+                className=" cursor-pointer hover:text-blue-100 text-md font-light"
+                style={{ transition: "0.3s" }}
+              >
+                My Resumes
               </Link>
               <li
                 className=" cursor-pointer hover:text-blue-100 textmd font-light"

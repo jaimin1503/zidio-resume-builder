@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import img1 from "./assets/step1.png";
 import img2 from "./assets/step2.png";
@@ -22,12 +23,12 @@ const Features = () => {
   ];
 
   return (
-    <div className="text-center text-blue-300 w-full py-20 px-10 h-full relative bg-richblack-900">
+    <div className="text-center bg-white text-blue-300 w-full py-20 px-10 h-full relative">
       <h1 className="text-5xl font-bold text-richblack-900 mb-20 px-10">
         FEATURES
       </h1>
       <div className="w-full h-full flex flex-row justify-center items-center px-20">
-        <div className="w-1 mr-20 relative bg-richblack-900 flex flex-col items-center justify-center h-full">
+        <div className="w-1 ml-10 mr-10 relative bg-richblack-900 flex flex-col items-center justify-center h-full">
           {[1, 2, 3].map((num) => (
             <button
               key={num}
@@ -40,7 +41,7 @@ const Features = () => {
             </button>
           ))}
         </div>
-        <div className="lg:w-full w-80 p-10 lg:p-20 text-left bg-richblack-900 border-2 border-blue-200 border-opacity-90 text-white rounded-lg">
+        <div className="lg:w-full w-80 p-10 mr-5 lg:mr-0  lg:p-20 text-left bg-richblack-900 border-2 border-blue-200 border-opacity-90 text-white rounded-lg">
           <h2 className="text-2xl lg:text-5xl font-bold mb-2 whitespace-nowrap">
             {features[activeFeature - 1].title}
           </h2>

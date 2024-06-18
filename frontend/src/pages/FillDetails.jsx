@@ -14,33 +14,16 @@ export default function FillDetails() {
   };
   return (
     <>
-      <Navbar />
-      <div className=" text-white">
-        {/* <div className="topBar h-[20vh] bg-blue-300 flex justify-between">
-        <h1 className=" font-bold text-3xl text-whit px-10 py-10">ResumeHub</h1>
-        <Link
-          to={"/templates"}
-          className=" text-xl font-medium cursor-pointer px-10 py-10"
-        >
-          ChangeTemplate
-        </Link>
-      </div> */}
-        <div className=" flex w-screen">
-          <div className=" hidden lg:block">
+      <div className="text-white w-full h-full px-10 py-10">
+        <h2 class="text-center text-richblack-900 text-3xl font-bold">
+          DASHBOARD
+        </h2>
+        <div className="flex justify-center items-center w-full">
+          <div className="hidden lg:block">
             <SideBar />
           </div>
           <FormContainer />
         </div>
-        {/* <Drawer anchor="left" open={open} onClose={() => toggleDrawer(false)}>
-        <Box
-          sx={{
-            backgroundColor: "rgb(22 29 41)",
-            height: "100%",
-          }}
-        >
-          <SideBar toggleDrawer={toggleDrawer} />
-        </Box>
-      </Drawer> */}
       </div>
     </>
   );
