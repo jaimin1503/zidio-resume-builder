@@ -24,7 +24,7 @@ export default function SideBar({ toggleDrawer }) {
   ];
 
   return (
-    <div className="rounded-2xl flex flex-col justify-center items-center bg-richblack-900 w-[379px] h-auto shadow-lg">
+    <div className="rounded-2xl flex flex-col justify-center items-center bg-richblack-900 w-[379px] h-[90vh] shadow-lg">
       {/* <CloseIcon
         onClick={() => toggleDrawer(false)}
         className="cursor-pointer"

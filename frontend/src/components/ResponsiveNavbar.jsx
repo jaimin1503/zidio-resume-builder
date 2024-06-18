@@ -25,11 +25,6 @@ const ResponsiveNavbar = ({ toggleDrawer, token, handleLogout }) => {
             </a>
           </li>
           <li className=" p-4 border-b flex">
-            <a className=" text-lg" href="/myresumes">
-              My Resumes
-            </a>
-          </li>
-          <li className=" p-4 border-b flex">
             <a className=" text-lg" href="/">
               JoinResumeHub
             </a>

@@ -1,4 +1,3 @@
-
 import Drawer from "@mui/material/Drawer";
 import { useEffect, useState } from "react";
 import ResponsiveNavbar from "./ResponsiveNavbar";
@@ -8,21 +7,17 @@ import { Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../utils/auth";
 import { setToken } from "../redux/slices/authSlice";
-
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
-
   const handleLogout = () => {
     dispatch(logout());
     window.location.href = "/login";
   };
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -32,7 +27,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="w-full h-18 py-3 flex justify-between sticky top-0 z-50  bg-richblack-900 border-b-[0.1px] border-pure-greys-25 px-6 lg:px-10">
+      <div className="w-full h-18 py-3 flex justify-between sticky top-0 z-50  bg-richblack-900 border-b-[0.1px] border-pure-greys-25 px-10">
         <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
           <Box
             sx={{
@@ -47,7 +42,6 @@ export default function Navbar() {
             />
           </Box>
         </Drawer>
-
         <nav className="w-full flex items-center justify-between text-white">
           <div className="left text-2xl font-bold text-blue-100 cursor-pointer">
             ResumeHub
@@ -67,13 +61,6 @@ export default function Navbar() {
                 style={{ transition: "0.3s" }}
               >
                 Templates
-              </Link>
-              <Link
-                to={"/myresumes"}
-                className=" cursor-pointer hover:text-blue-100 text-md font-light"
-                style={{ transition: "0.3s" }}
-              >
-                My Resumes
               </Link>
               <li
                 className=" cursor-pointer hover:text-blue-100 textmd font-light"
@@ -116,7 +103,6 @@ export default function Navbar() {
               </button>
             </div>
           )}
-
           <div
             onClick={toggleDrawer(true)}
             className=" text-white p-4 lg:hidden cursor-pointer"

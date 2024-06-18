@@ -14,7 +14,7 @@ import AboutUs from "./pages/AboutUs";
 
 function App() {
   return (
-    <div className="w-screen h-screen min-w-full min-h-screen overflow-x-hidden">
+    <div className="w-screen min-w-full min-h-screen bg-richblack-900">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
