@@ -1,15 +1,30 @@
-import { useState } from "react";
+import React, { useState, useRef } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useSelector, useDispatch } from "react-redux";
 import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
 import "react-quill/dist/quill.snow.css"; // import styles for the editor
 import ReactQuill from "react-quill";
+import { setFormData } from "../../redux/slices/resumeSlice";
 
 export default function PersonalDetails() {
   const [description, setDescription] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const fileInputRef = useRef(null);
   const { globalIndex } = useSelector((state) => state.globalIndex);
   const dispatch = useDispatch();
+  const [formdata, setFormdata] = useState({
+    firstName: "",
+    lastName: "",
+    Profession: "",
+    Address: "",
+    City: "",
+    State: "",
+    ZipCode: "",
+  });
+
+  const handleOnChange = (e) => {
+    setFormdata((prv) => ({ ...prv, [e.target.name]: e.target.value }));
+  };
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -17,6 +32,12 @@ export default function PersonalDetails() {
 
   const handleNextSession = () => {
     dispatch(setGlobalIndex((globalIndex + 1) % 5));
+    console.log("submited");
+    dispatch(setFormData(formdata));
+  };
+
+  const handleUploadClick = () => {
+    fileInputRef.current.click();
   };
 
   return (
@@ -35,6 +56,8 @@ export default function PersonalDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="firstname"
             placeholder="John"
+            name="firstName"
+            onChange={handleOnChange}
           />
         </div>
         <div className="flex flex-col">
@@ -46,6 +69,8 @@ export default function PersonalDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="lastname"
             placeholder="Doe"
+            name="lastName"
+            onChange={handleOnChange}
           />
         </div>
         <div className="flex flex-col">
@@ -57,6 +82,8 @@ export default function PersonalDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="profession"
             placeholder="Software Engineer"
+            name="Profession"
+            onChange={handleOnChange}
           />
         </div>
         <div className="flex flex-col">
@@ -68,6 +95,8 @@ export default function PersonalDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="address"
             placeholder="St James street New Jersey"
+            name="Address"
+            onChange={handleOnChange}
           />
         </div>
         <div className="flex flex-col">
@@ -79,6 +108,8 @@ export default function PersonalDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="city"
             placeholder="Janes Inn"
+            name="City"
+            onChange={handleOnChange}
           />
         </div>
         <div className="flex flex-col">
@@ -90,6 +121,8 @@ export default function PersonalDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="state"
             placeholder="New Jersey"
+            name="State"
+            onChange={handleOnChange}
           />
         </div>
         <div className="flex flex-col">
@@ -101,20 +134,30 @@ export default function PersonalDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="zip"
             placeholder="123789"
+            name="ZipCode"
+            onChange={handleOnChange}
           />
         </div>
         <div className="flex flex-col">
-          <label htmlFor="fileUpload" className="text-gray-700 mb-2">
+          <label htmlFor="fileUpload" className=" text-white mb-2">
             Upload Photo
           </label>
+          <button
+            onClick={handleUploadClick}
+            className="p-3 rounded border border-gray-300 bg-gray-100 text-blue-200"
+          >
+            Choose File
+          </button>
           <input
             type="file"
-            className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
+            className="hidden"
+            accept="image/*"
             id="fileUpload"
+            ref={fileInputRef}
             onChange={handleFileChange}
           />
           {selectedFile && (
-            <div className="mt-2 text-gray-700">
+            <div className="mt-2 text-white">
               Selected file: {selectedFile.name}
             </div>
           )}

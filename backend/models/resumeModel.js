@@ -10,6 +10,9 @@ const PersonalInfoSchema = new Schema({
   linkedin: { type: String },
   github: { type: String },
   website: { type: String },
+  City: { type: String },
+  State: { type: String },
+  ZipCode: { type: String },
 });
 
 const ExperienceSchema = new Schema({
@@ -56,6 +59,8 @@ const ResumeSchema = new Schema({
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
   hobbies: [String],
+  Profession: { type: String },
+  Address: { type: String },
 });
 
 ResumeSchema.pre("save", function (next) {
