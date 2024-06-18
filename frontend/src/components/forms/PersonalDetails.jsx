@@ -121,7 +121,7 @@ export default function PersonalDetails() {
         </div>
       </div>
       <div className="mt-6">
-        <label htmlFor="description" className="text-gray-700 font-medium mb-2">
+        <label htmlFor="description" className="text-gray-700 font-medium">
           Professional Summary
         </label>
         <ReactQuill
@@ -129,7 +129,7 @@ export default function PersonalDetails() {
           value={description}
           onChange={setDescription}
           className="bg-white text-black"
-          style={{ width: '100%', height: '150px' }}
+          style={{ width: "100%", height: "100%", marginTop: "0.5rem" }}
         />
       </div>
       <div className="flex justify-between items-center mt-10">
