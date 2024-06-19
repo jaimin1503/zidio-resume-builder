@@ -50,7 +50,10 @@ export default function CertificationDetails() {
       .post(`${import.meta.env.VITE_BASE_URL}/resume/createResume`, resume, {
         withCredentials: true,
       })
-      .then((res) => console.log(res.data.message))
+      .then((res) => {
+        dispatch(setResume(res.data.savedResume));
+        console.log(res.data.message);
+      })
       .catch((error) => console.error(error));
   };
 

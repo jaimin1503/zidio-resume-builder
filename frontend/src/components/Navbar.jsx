@@ -94,7 +94,7 @@ export default function Navbar() {
               </Link>
             </div>
           ) : (
-            <div className=" mx-4">
+            <div className=" mx-4 hidden lg:flex">
               <button
                 onClick={handleLogout}
                 className=" font-medium py-2 px-4 bg-blue-400 hover:bg-blue-500 rounded-[5px]"
