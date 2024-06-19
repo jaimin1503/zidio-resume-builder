@@ -1,20 +1,23 @@
 import React from "react";
 
-const Template3 = () => {
+const Template3 = ({ resume }) => {
   return (
     <>
       <p>Template 3</p>
       <div className="bg-white shadow-md rounded-lg overflow-hidden text-black p-6 w-[210mm] h-[297mm]">
         <div className="flex flex-col items-center lg:flex-row">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">John Doe</h1>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+            {resume?.personalDetails?.firstName +
+              " " +
+              resume?.personalDetails?.lastName}
+          </h1>
           <p className="text-lg text-gray-600 mb-4">Web Developer</p>
         </div>
         <hr className="my-4" />
         <div className="my-4">
           <h2 className="text-xl font-semibold text-gray-800 mb-2">Summary</h2>
           <p className="text-gray-700">
-            Experienced web developer with a passion for creating responsive and
-            user-friendly applications. Skilled in React, JavaScript, and CSS.
+            {resume?.personalDetails?.Description}
           </p>
         </div>
         <div className="my-4">

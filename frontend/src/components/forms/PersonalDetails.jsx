@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
 import "react-quill/dist/quill.snow.css"; // import styles for the editor
 import ReactQuill from "react-quill";
-import { setFormData } from "../../redux/slices/resumeSlice";
+import { setPersonalDetails } from "../../redux/slices/resumeSlice";
 
 export default function PersonalDetails() {
   const [description, setDescription] = useState("");
@@ -33,7 +33,11 @@ export default function PersonalDetails() {
   const handleNextSession = () => {
     dispatch(setGlobalIndex((globalIndex + 1) % 5));
     console.log("submited");
-    dispatch(setFormData(formdata));
+    const newData = {
+      ...formdata,
+      Description: description,
+    };
+    dispatch(setPersonalDetails(newData));
   };
 
   const handleUploadClick = () => {

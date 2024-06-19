@@ -1,36 +1,24 @@
 import { Resume } from "../models/resumeModel.js";
 import { User } from "../models/userModel.js";
 
-// Controller function to create a new resume
 export const createResume = async (req, res) => {
   try {
-    // Extract resume data from the request body
     const {
-      title,
-      personalInfo,
-      summary,
-      experiences,
-      education,
-      skills,
-      projects,
-      certifications,
-      languages,
-      interests,
+      personalDetails,
+      experienceDetails,
+      educationDetails,
+      contactDetails,
+      certificationsDetails,
     } = req.body;
 
     // Create a new resume instance
     const newResume = new Resume({
-      user: req.user._id, // Assuming req.user.id contains the authenticated user's ID
-      title,
-      personalInfo,
-      summary,
-      experiences,
-      education,
-      skills,
-      projects,
-      certifications,
-      languages,
-      interests,
+      user: req.user._id,
+      personalDetails,
+      experienceDetails,
+      educationDetails,
+      contactDetails,
+      certificationsDetails,
     });
 
     // Save the new resume to the database
@@ -43,7 +31,7 @@ export const createResume = async (req, res) => {
 
     // Return the saved resume in the response
     res.status(201).json({
-      message: "resume created successfully",
+      message: "Resume created successfully",
       data: savedResume,
       success: true,
     });
@@ -59,15 +47,11 @@ export const editResume = async (req, res) => {
     const resumeId = req.params.id;
     const userId = req.user._id;
 
-    // Find the resume by ID
     const resume = await Resume.findById(resumeId);
-
-    // Check if the resume exists
     if (!resume) {
       return res.status(404).json({ message: "Resume not found" });
     }
 
-    // Check if the resume belongs to the authenticated user
     if (resume.user.toString() !== userId) {
       return res.status(401).json({ message: "Unauthorized" });
     }
@@ -87,4 +71,3 @@ export const editResume = async (req, res) => {
     res.status(500).json({ message: "Server error, please try again later." });
   }
 };
-

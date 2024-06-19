@@ -1,43 +1,67 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import "react-quill/dist/quill.snow.css"; // import styles for react-quill
 import ReactQuill from "react-quill";
 import { useDispatch, useSelector } from "react-redux";
 import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
-import { setFormData } from "../../redux/slices/resumeSlice"; // Import setFormData action
-import { Link, useParams } from "react-router-dom";
+import { setCertificationsDetails } from "../../redux/slices/resumeSlice"; // Import setFormData action
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import { setResume } from "../../redux/slices/resumeSlice";
 
 export default function CertificationDetails() {
   const { globalIndex } = useSelector((state) => state.globalIndex);
-  const { formData: Details } = useSelector((state) => state.resume);
   const { index } = useParams();
   const dispatch = useDispatch();
+  const [description, setDescription] = useState("");
   const [formDetails, setFormDetails] = useState({
     organization: "",
     title: "",
     date: "",
-    description: "",
   });
+  const navigate = useNavigate();
+  const {
+    personalDetails,
+    contactDetails,
+    educationDetails,
+    experienceDetails,
+    certificationsDetails,
+    resume,
+  } = useSelector((state) => state.resume);
+
+  useEffect(() => {
+    dispatch(
+      setResume({
+        personalDetails,
+        contactDetails,
+        educationDetails,
+        experienceDetails,
+        certificationsDetails,
+      })
+    );
+  }, [dispatch]);
 
   const handleChange = (e) => {
     setFormDetails((prv) => ({ ...prv, [e.target.name]: e.target.value }));
   };
 
-  const handleDescriptionChange = (value) => {
-    setFormDetails((prevState) => ({
-      ...prevState,
-      description: value,
-    }));
+  const handleSubmit = () => {
+    axios
+      .post(`${import.meta.env.VITE_BASE_URL}/resume/createResume`, resume, {
+        withCredentials: true,
+      })
+      .then((res) => console.log(res.data.message))
+      .catch((error) => console.error(error));
   };
 
   const handleNext = () => {
-    console.log("submited");
     const newdata = {
       ...formDetails,
-      ...Details.details,
       Description: description,
     };
-    dispatch(setFormData(newdata));
+    navigate(`/viewResume/${index}`);
+    dispatch(setCertificationsDetails(newdata));
+    handleSubmit();
   };
 
   return (
@@ -60,6 +84,7 @@ export default function CertificationDetails() {
             placeholder="Steve Jobs Designers"
             value={formDetails.organization}
             onChange={handleChange}
+            name="organization"
           />
         </div>
         <div className="flex flex-col">
@@ -73,6 +98,7 @@ export default function CertificationDetails() {
             placeholder="La Michael Angelo Award"
             value={formDetails.title}
             onChange={handleChange}
+            name="title"
           />
         </div>
         <div className="flex flex-col">
@@ -80,12 +106,13 @@ export default function CertificationDetails() {
             Date of Acquisition
           </label>
           <input
-            type="text"
+            type="date"
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="date"
             placeholder="03/03/1998"
             value={formDetails.date}
             onChange={handleChange}
+            name="date"
           />
         </div>
       </div>
@@ -93,8 +120,8 @@ export default function CertificationDetails() {
         <h2 className="text-white font-medium mb-2">Description</h2>
         <ReactQuill
           theme="snow"
-          value={formDetails.description}
-          onChange={handleDescriptionChange}
+          value={description}
+          onChange={setDescription}
           placeholder="Enter description..."
           className="bg-white text-black"
         />
@@ -106,13 +133,13 @@ export default function CertificationDetails() {
         >
           <ArrowBackIcon />
         </div>
-        <Link
-          to={`/viewResume/${index}`}
-          onClick={handleNext}
+
+        <button
+          onClick={() => handleNext()}
           className="py-3 px-6 bg-blue-400 hover:bg-blue-500 text-white rounded-md transition duration-300"
         >
           Next
-        </Link>
+        </button>
       </div>
     </div>
   );

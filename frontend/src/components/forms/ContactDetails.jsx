@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useDispatch, useSelector } from "react-redux";
 import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
-import { setFormData } from "../../redux/slices/resumeSlice";
+import { setContactDetails } from "../../redux/slices/resumeSlice";
 
 export default function ContactDetails() {
   const { globalIndex } = useSelector((state) => state.globalIndex);
   const dispatch = useDispatch();
-  const { formData: Details } = useSelector((state) => state.resume);
 
-  // State to manage form data
   const [formDetails, setFormDetails] = useState({
     email: "",
     phone: "",
@@ -20,19 +18,13 @@ export default function ContactDetails() {
     github: "",
   });
 
-  // Handle input change
   const handleChange = (e) => {
     setFormDetails((prv) => ({ ...prv, [e.target.name]: e.target.value }));
   };
 
-  // Function to handle form submission or next action
   const handleNext = () => {
     console.log("submited");
-    const newdata = {
-      ...formDetails,
-      ...Details.details,
-    };
-    dispatch(setFormData(newdata));
+    dispatch(setContactDetails(formDetails));
     dispatch(setGlobalIndex((globalIndex + 1) % 5));
   };
 
@@ -56,6 +48,7 @@ export default function ContactDetails() {
             placeholder="johndoe@gmail.com"
             value={formDetails.email}
             onChange={handleChange}
+            name="email"
           />
         </div>
         <div className="flex flex-col">
@@ -70,6 +63,7 @@ export default function ContactDetails() {
               placeholder="1448 90-9 28765"
               value={formDetails.phone}
               onChange={handleChange}
+              name="phone"
             />
           </div>
         </div>
@@ -84,6 +78,7 @@ export default function ContactDetails() {
             placeholder="Linkedin/johndoe.com"
             value={formDetails.linkedin}
             onChange={handleChange}
+            name="linkedin"
           />
         </div>
         <div className="flex flex-col">
@@ -97,6 +92,7 @@ export default function ContactDetails() {
             placeholder="Twitter/johndoe.com"
             value={formDetails.twitter}
             onChange={handleChange}
+            name="twitter"
           />
         </div>
         <div className="flex flex-col">
@@ -110,6 +106,7 @@ export default function ContactDetails() {
             placeholder="Instagram/johndoe.com"
             value={formDetails.instagram}
             onChange={handleChange}
+            name="instagram"
           />
         </div>
         <div className="flex flex-col">
@@ -123,6 +120,7 @@ export default function ContactDetails() {
             placeholder="Johnd.netlify.app"
             value={formDetails.portfolio}
             onChange={handleChange}
+            name="portfolio"
           />
         </div>
         <div className="flex flex-col">
@@ -136,6 +134,7 @@ export default function ContactDetails() {
             placeholder="Github/johnie.com"
             value={formDetails.github}
             onChange={handleChange}
+            name="github"
           />
         </div>
       </div>

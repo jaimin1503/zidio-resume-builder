@@ -4,12 +4,11 @@ import "react-quill/dist/quill.snow.css"; // import styles for the editor
 import ReactQuill from "react-quill";
 import { useSelector, useDispatch } from "react-redux";
 import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
-import { setFormData } from "../../redux/slices/resumeSlice";
+import { setExperienceDetails } from "../../redux/slices/resumeSlice";
 
 export default function ExperienceDetails() {
   const [description, setDescription] = useState("");
   const { globalIndex } = useSelector((state) => state.globalIndex);
-  const { formData: Details } = useSelector((state) => state.resume);
   const dispatch = useDispatch();
   const [formdata, setFormdata] = useState({
     Employer: "",
@@ -22,17 +21,15 @@ export default function ExperienceDetails() {
   });
 
   const handleOnChange = (e) => {
-    console.log("formdata", formdata);
     setFormdata((prv) => ({ ...prv, [e.target.name]: e.target.value }));
   };
   const handleOnsubmit = (e) => {
     console.log("submited");
     const newdata = {
       ...formdata,
-      ...Details.details,
       Description: description,
     };
-    dispatch(setFormData(newdata));
+    dispatch(setExperienceDetails(newdata));
     dispatch(setGlobalIndex((globalIndex + 1) % 5));
   };
 

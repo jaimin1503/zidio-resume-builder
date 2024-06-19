@@ -1,12 +1,11 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useSelector, useDispatch } from "react-redux";
 import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
-import { setFormData } from "../../redux/slices/resumeSlice";
+import { setEducationDetails } from "../../redux/slices/resumeSlice";
 import { useState } from "react";
 
 export default function EducationDetails() {
   const { globalIndex } = useSelector((state) => state.globalIndex);
-  const { formData: PersonalDetails } = useSelector((state) => state.resume);
   const dispatch = useDispatch();
   const [formdata, setFormdata] = useState({
     InstitutionName: "",
@@ -22,8 +21,8 @@ export default function EducationDetails() {
   };
   const handleOnsubmit = (e) => {
     console.log("submited");
-    const newdata = { ...formdata, ...PersonalDetails.details };
-    dispatch(setFormData(newdata));
+
+    dispatch(setEducationDetails(formdata));
     dispatch(setGlobalIndex((globalIndex + 1) % 5));
   };
   return (
@@ -94,7 +93,7 @@ export default function EducationDetails() {
               Start
             </label>
             <input
-              type="text"
+              type="date"
               className="p-3 rounded border border-gray-300"
               id="start"
               placeholder="MM/YY"
@@ -107,7 +106,7 @@ export default function EducationDetails() {
               Finish
             </label>
             <input
-              type="text"
+              type="date"
               className="p-3 rounded border border-gray-300"
               id="finish"
               placeholder="MM/YY"

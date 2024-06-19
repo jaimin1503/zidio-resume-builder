@@ -1,71 +1,60 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-const PersonalInfoSchema = new Schema({
+const PersonalDetailsSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
+  profession: { type: String, required: true },
+  address: { type: String, required: true },
+  city: { type: String, required: true },
+  state: { type: String, required: true },
+  zipCode: { type: String, required: true },
+});
+
+const ExperienceDetailsSchema = new Schema({
+  employer: { type: String, required: true },
+  company: { type: String, required: true },
+  employerAddress: { type: String, required: true },
+  role: { type: String, required: true },
+  employerStart: { type: Date, required: true },
+  employerFinish: { type: Date },
+  currently: { type: Boolean, default: true },
+});
+
+const EducationDetailsSchema = new Schema({
+  institutionName: { type: String, required: true },
+  course: { type: String, required: true },
+  educationCountry: { type: String, required: true },
+  educationState: { type: String, required: true },
+  educationStart: { type: Date, required: true },
+  educationFinish: { type: Date },
+});
+
+const ContactDetailsSchema = new Schema({
   email: { type: String, required: true },
   phone: { type: String, required: true },
-  address: { type: String, required: true },
   linkedin: { type: String },
+  twitter: { type: String },
+  instagram: { type: String },
+  portfolio: { type: String },
   github: { type: String },
-  website: { type: String },
-  City: { type: String },
-  State: { type: String },
-  ZipCode: { type: String },
 });
 
-const ExperienceSchema = new Schema({
-  jobTitle: { type: String, required: true },
-  company: { type: String, required: true },
-  startDate: { type: Date, required: true },
-  endDate: { type: Date },
-  description: { type: String, required: true },
-});
-
-const EducationSchema = new Schema({
-  institution: { type: String, required: true },
-  degree: { type: String, required: true },
-  startDate: { type: Date, required: true },
-  endDate: { type: Date },
-  description: { type: String },
-});
-
-const ProjectSchema = new Schema({
+const CertificationsDetailsSchema = new Schema({
+  organization: { type: String, required: true },
   title: { type: String, required: true },
-  description: { type: String, required: true },
-  link: { type: String },
-});
-
-const CertificationSchema = new Schema({
-  name: { type: String, required: true },
-  issuingOrganization: { type: String, required: true },
-  issueDate: { type: Date, required: true },
-  expirationDate: { type: Date },
+  date: { type: Date, required: true },
 });
 
 const ResumeSchema = new Schema({
-  user: { type: Schema.Types.ObjectId, ref: "User", required: true },
-  title: { type: String, required: true },
-  personalInfo: { type: PersonalInfoSchema, required: true },
-  summary: { type: String, required: true },
-  experiences: [ExperienceSchema],
-  education: [EducationSchema],
-  skills: [String],
-  projects: [ProjectSchema],
-  certifications: [CertificationSchema],
-  languages: [String],
-  interests: [String],
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
-  hobbies: [String],
-  Profession: { type: String },
-  Address: { type: String },
-});
-
-ResumeSchema.pre("save", function (next) {
-  this.updatedAt = Date.now();
-  next();
+  personalDetails: { type: PersonalDetailsSchema, required: true },
+  experienceDetails: { type: [ExperienceDetailsSchema], required: true },
+  educationDetails: { type: [EducationDetailsSchema], required: true },
+  contactDetails: { type: ContactDetailsSchema, required: true },
+  certificationsDetails: {
+    type: [CertificationsDetailsSchema],
+    required: true,
+  },
 });
 
 export const Resume = mongoose.model("Resume", ResumeSchema);
