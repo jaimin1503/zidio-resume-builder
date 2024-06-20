@@ -15,7 +15,7 @@ export default function AboutHeader() {
       </div>
       <img
         src={coffeeResume}
-        className="w-[80%] lg:w-[50%] rounded-lg absolute -bottom-24 lg:-bottom-52 -rotate-12"
+        className="w-[80%] lg:w-[50%] rounded-lg absolute -bottom-24 lg:-bottom-52 md:-bottom-52 -rotate-12"
         alt=""
       />
     </div>
