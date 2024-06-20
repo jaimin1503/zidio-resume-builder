@@ -31,8 +31,8 @@ export default function Signup() {
   };
 
   return (
-    <div className="w-full h-full flex justify-center items-center text-white bg-richblack-900 px-10 py-44">
-      <div className="w-full lg:w-1/2 h-auto border border-blue-300 rounded-2xl px-10 py-5">
+    <div className="w-full h-full flex justify-center items-center text-white bg-richblack-900 sm:px-10 py-10 md:py-20">
+      <div className="w-full lg:w-1/2 h-auto md:border border-blue-300 rounded-2xl px-5 sm:px-20 py-5">
         <h1 className="text-3xl sm:text-4xl font-medium text-center mb-5">
           SignUp to ResumeHub
         </h1>

@@ -22,7 +22,7 @@ function App() {
         <Route path="/templates" element={<Templates />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/myresumes" element={<MyResumes />} />
-        <Route path="/viewResume/:index" element={<ViewResume />} />
+        <Route path="/viewResume/:index/:id" element={<ViewResume />} />
       </Routes>
     </div>
   );

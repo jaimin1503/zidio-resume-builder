@@ -8,6 +8,7 @@ import { setCertificationsDetails } from "../../redux/slices/resumeSlice"; // Im
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { setResume } from "../../redux/slices/resumeSlice";
+import toast from "react-hot-toast";
 
 export default function CertificationDetails() {
   const { globalIndex } = useSelector((state) => state.globalIndex);
@@ -18,6 +19,7 @@ export default function CertificationDetails() {
     organization: "",
     title: "",
     date: "",
+    discription: description,
   });
   const navigate = useNavigate();
   const {
@@ -45,26 +47,40 @@ export default function CertificationDetails() {
     setFormDetails((prv) => ({ ...prv, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = () => {
-    axios
-      .post(`${import.meta.env.VITE_BASE_URL}/resume/createResume`, resume, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        dispatch(setResume(res.data.savedResume));
-        console.log(res.data.message);
-      })
-      .catch((error) => console.error(error));
-  };
-
   const handleNext = () => {
     const newdata = {
       ...formDetails,
       Description: description,
     };
-    navigate(`/viewResume/${index}`);
+
     dispatch(setCertificationsDetails(newdata));
     handleSubmit();
+  };
+
+  const handleSubmit = () => {
+    const toastId = toast.loading("Loading...");
+    axios
+      .post(
+        `${import.meta.env.VITE_BASE_URL}/resume/createResume`,
+        {
+          personalDetails,
+          educationDetails,
+          experienceDetails,
+          contactDetails,
+          certificationsDetails,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        dispatch(setResume(res.data.data.savedResume));
+        console.log(res.data.data);
+        navigate(`/viewResume/${index}/${res.data.data._id}`);
+        toast.success("Resume created Successfully 🎉");
+      })
+      .catch((error) => console.error(error));
+    toast.dismiss(toastId);
   };
 
   return (

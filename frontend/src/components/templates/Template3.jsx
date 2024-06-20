@@ -1,8 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-const Template3 = () => {
-  const { resume } = useSelector((state) => state.resume);
+const Template3 = ({ resume }) => {
   return (
     <>
       <p>Template 3</p>

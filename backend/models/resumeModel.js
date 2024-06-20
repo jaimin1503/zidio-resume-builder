@@ -9,6 +9,7 @@ const PersonalDetailsSchema = new Schema({
   city: { type: String, required: true },
   state: { type: String, required: true },
   zipCode: { type: String, required: true },
+  description: { type: String },
 });
 
 const ExperienceDetailsSchema = new Schema({
@@ -19,6 +20,7 @@ const ExperienceDetailsSchema = new Schema({
   employerStart: { type: Date, required: true },
   employerFinish: { type: Date },
   currently: { type: Boolean, default: true },
+  description: { type: String },
 });
 
 const EducationDetailsSchema = new Schema({
@@ -41,9 +43,10 @@ const ContactDetailsSchema = new Schema({
 });
 
 const CertificationsDetailsSchema = new Schema({
-  organization: { type: String, required: true },
-  title: { type: String, required: true },
-  date: { type: Date, required: true },
+  organization: { type: String },
+  title: { type: String },
+  date: { type: Date },
+  description: { type: String },
 });
 
 const ResumeSchema = new Schema({
@@ -53,7 +56,6 @@ const ResumeSchema = new Schema({
   contactDetails: { type: ContactDetailsSchema, required: true },
   certificationsDetails: {
     type: [CertificationsDetailsSchema],
-    required: true,
   },
 });
 

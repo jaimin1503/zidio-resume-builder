@@ -15,11 +15,12 @@ export default function PersonalDetails() {
   const [formdata, setFormdata] = useState({
     firstName: "",
     lastName: "",
-    Profession: "",
-    Address: "",
-    City: "",
-    State: "",
-    ZipCode: "",
+    profession: "",
+    address: "",
+    city: "",
+    state: "",
+    zipCode: "",
+    discription: description,
   });
 
   const handleOnChange = (e) => {
@@ -86,7 +87,7 @@ export default function PersonalDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="profession"
             placeholder="Software Engineer"
-            name="Profession"
+            name="profession"
             onChange={handleOnChange}
           />
         </div>
@@ -99,7 +100,7 @@ export default function PersonalDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="address"
             placeholder="St James street New Jersey"
-            name="Address"
+            name="address"
             onChange={handleOnChange}
           />
         </div>
@@ -112,7 +113,7 @@ export default function PersonalDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="city"
             placeholder="Janes Inn"
-            name="City"
+            name="city"
             onChange={handleOnChange}
           />
         </div>
@@ -125,7 +126,7 @@ export default function PersonalDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="state"
             placeholder="New Jersey"
-            name="State"
+            name="state"
             onChange={handleOnChange}
           />
         </div>
@@ -138,7 +139,7 @@ export default function PersonalDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="zip"
             placeholder="123789"
-            name="ZipCode"
+            name="zipCode"
             onChange={handleOnChange}
           />
         </div>
