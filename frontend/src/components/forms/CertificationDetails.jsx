@@ -1,17 +1,70 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import "react-quill/dist/quill.snow.css"; // import styles for react-quill
 import ReactQuill from "react-quill";
 import { useDispatch, useSelector } from "react-redux";
 import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
-import { Link } from "react-router-dom";
+import { setCertificationsDetails } from "../../redux/slices/resumeSlice"; // Import setFormData action
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import { setResume } from "../../redux/slices/resumeSlice";
 
 export default function CertificationDetails() {
   const { globalIndex } = useSelector((state) => state.globalIndex);
+  const { index } = useParams();
   const dispatch = useDispatch();
   const [description, setDescription] = useState("");
-  const handleDescriptionChange = (value) => {
-    setDescription(value);
+  const [formDetails, setFormDetails] = useState({
+    organization: "",
+    title: "",
+    date: "",
+  });
+  const navigate = useNavigate();
+  const {
+    personalDetails,
+    contactDetails,
+    educationDetails,
+    experienceDetails,
+    certificationsDetails,
+    resume,
+  } = useSelector((state) => state.resume);
+
+  useEffect(() => {
+    dispatch(
+      setResume({
+        personalDetails,
+        contactDetails,
+        educationDetails,
+        experienceDetails,
+        certificationsDetails,
+      })
+    );
+  }, [dispatch]);
+
+  const handleChange = (e) => {
+    setFormDetails((prv) => ({ ...prv, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = () => {
+    axios
+      .post(`${import.meta.env.VITE_BASE_URL}/resume/createResume`, resume, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        dispatch(setResume(res.data.savedResume));
+        console.log(res.data.message);
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const handleNext = () => {
+    const newdata = {
+      ...formDetails,
+      Description: description,
+    };
+    navigate(`/viewResume/${index}`);
+    dispatch(setCertificationsDetails(newdata));
+    handleSubmit();
   };
 
   return (
@@ -32,6 +85,9 @@ export default function CertificationDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="organization"
             placeholder="Steve Jobs Designers"
+            value={formDetails.organization}
+            onChange={handleChange}
+            name="organization"
           />
         </div>
         <div className="flex flex-col">
@@ -43,6 +99,9 @@ export default function CertificationDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="title"
             placeholder="La Michael Angelo Award"
+            value={formDetails.title}
+            onChange={handleChange}
+            name="title"
           />
         </div>
         <div className="flex flex-col">
@@ -50,10 +109,13 @@ export default function CertificationDetails() {
             Date of Acquisition
           </label>
           <input
-            type="text"
+            type="date"
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="date"
             placeholder="03/03/1998"
+            value={formDetails.date}
+            onChange={handleChange}
+            name="date"
           />
         </div>
       </div>
@@ -62,9 +124,9 @@ export default function CertificationDetails() {
         <ReactQuill
           theme="snow"
           value={description}
-          onChange={handleDescriptionChange}
+          onChange={setDescription}
           placeholder="Enter description..."
-          className=" bg-white text-black"
+          className="bg-white text-black"
         />
       </div>
       <div className="flex justify-between items-center mt-10">
@@ -74,13 +136,13 @@ export default function CertificationDetails() {
         >
           <ArrowBackIcon />
         </div>
-        <Link
-          to={"/templates"}
-          // onClick={() => setGlobalIndex((globalIndex + 1) % 5)}
+
+        <button
+          onClick={() => handleNext()}
           className="py-3 px-6 bg-blue-400 hover:bg-blue-500 text-white rounded-md transition duration-300"
         >
-        Next
-        </Link>
+          Next
+        </button>
       </div>
     </div>
   );

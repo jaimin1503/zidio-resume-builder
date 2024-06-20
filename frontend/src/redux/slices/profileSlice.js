@@ -8,11 +8,11 @@ const profileSlice = createSlice({
   name: "profile",
   initialState,
   reducers: {
-    setProfile(state, value) {
-      state.signupData = value.payload;
+    setProfile(state, action) {
+      state.signupData = action.payload;
     },
-    setLoading(state, value) {
-      state.loading = value.payload;
+    setLoading(state, action) {
+      state.loading = action.payload;
     },
   },
 });

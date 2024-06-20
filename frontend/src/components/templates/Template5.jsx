@@ -1,9 +1,7 @@
-
-
 function Template5() {
   return (
     <div
-      className="bg-gray-100 text-gray-800 shadow-lg rounded-lg overflow-hidden"
+      className=" shadow-lg rounded-lg overflow-hidden bg-white text-black"
       style={{ width: "210mm", height: "297mm" }}
     >
       <div className="flex flex-col h-full p-8">
@@ -51,34 +49,54 @@ function Template5() {
             <div className="mb-8">
               <h2 className="text-2xl font-bold mb-4">PROFILE</h2>
               <p className="text-gray-700">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-              sagittis pretium nisl, nec commodo est. Fusce laoreet consequat
-              sapien, eu fermentum ex pulvinar eget. Praesent hendrerit nulla in
-              varius pharetra. Fusce facilisis venenatis lacus in lobortis.
-              Fusce vulputate iaculis mauris. Nunc risus arcu, tempor vel
-              dignissim porta, vulputate id quam.
-            </p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+                sagittis pretium nisl, nec commodo est. Fusce laoreet consequat
+                sapien, eu fermentum ex pulvinar eget. Praesent hendrerit nulla
+                in varius pharetra. Fusce facilisis venenatis lacus in lobortis.
+                Fusce vulputate iaculis mauris. Nunc risus arcu, tempor vel
+                dignissim porta, vulputate id quam.
+              </p>
             </div>
             <div className="mb-8">
               <h2 className="text-2xl font-bold mb-4">WORK EXPERIENCE</h2>
               <div className="mb-6">
-                <h3 className="text-xl font-semibold">Your Job Position here</h3>
+                <h3 className="text-xl font-semibold">
+                  Your Job Position here
+                </h3>
                 <p className="text-gray-700">Company name | 2020-2022</p>
                 <ul className="list-disc list-inside text-gray-700 mt-2">
-                  <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                  <li>Fusce laoreet consequat sapien, eu fermentum ex pulvinar eget.</li>
+                  <li>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  </li>
+                  <li>
+                    Fusce laoreet consequat sapien, eu fermentum ex pulvinar
+                    eget.
+                  </li>
                   <li>Praesent hendrerit nulla in varius pharetra.</li>
-                  <li>Nunc risus arcu, tempor vel dignissim porta, vulputate id quam.</li>
+                  <li>
+                    Nunc risus arcu, tempor vel dignissim porta, vulputate id
+                    quam.
+                  </li>
                 </ul>
               </div>
               <div>
-                <h3 className="text-xl font-semibold">Your Job Position here</h3>
+                <h3 className="text-xl font-semibold">
+                  Your Job Position here
+                </h3>
                 <p className="text-gray-700">Company name | 2020-2022</p>
                 <ul className="list-disc list-inside text-gray-700 mt-2">
-                  <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                  <li>Fusce laoreet consequat sapien, eu fermentum ex pulvinar eget.</li>
+                  <li>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  </li>
+                  <li>
+                    Fusce laoreet consequat sapien, eu fermentum ex pulvinar
+                    eget.
+                  </li>
                   <li>Praesent hendrerit nulla in varius pharetra.</li>
-                  <li>Nunc risus arcu, tempor vel dignissim porta, vulputate id quam.</li>
+                  <li>
+                    Nunc risus arcu, tempor vel dignissim porta, vulputate id
+                    quam.
+                  </li>
                 </ul>
               </div>
             </div>

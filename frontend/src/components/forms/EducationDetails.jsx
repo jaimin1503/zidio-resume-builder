@@ -1,10 +1,30 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useSelector, useDispatch } from "react-redux";
 import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
+import { setEducationDetails } from "../../redux/slices/resumeSlice";
+import { useState } from "react";
 
 export default function EducationDetails() {
   const { globalIndex } = useSelector((state) => state.globalIndex);
   const dispatch = useDispatch();
+  const [formdata, setFormdata] = useState({
+    InstitutionName: "",
+    Course: "",
+    EducationCountry: "",
+    EducationState: "",
+    EducationStart: "",
+    EducationFinish: "",
+  });
+
+  const handleOnChange = (e) => {
+    setFormdata((prv) => ({ ...prv, [e.target.name]: e.target.value }));
+  };
+  const handleOnsubmit = (e) => {
+    console.log("submited");
+
+    dispatch(setEducationDetails(formdata));
+    dispatch(setGlobalIndex((globalIndex + 1) % 5));
+  };
   return (
     <div className="p-6 h-full w-full bg-richblack-700 rounded-2xl shadow-lg text-black">
       <div className="flex justify-between items-center mb-6">
@@ -13,7 +33,7 @@ export default function EducationDetails() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="flex flex-col">
-          <label htmlFor="institution" className="text-pure-greys-200 mb-2">
+          <label htmlFor="institution" className="text-white mb-2">
             Institution Name
           </label>
           <input
@@ -21,10 +41,12 @@ export default function EducationDetails() {
             className="p-3 rounded border border-gray-300"
             id="institution"
             placeholder="Name of school"
+            onChange={handleOnChange}
+            name="InstitutionName"
           />
         </div>
         <div className="flex flex-col">
-          <label htmlFor="course" className="text-pure-greys-200 mb-2">
+          <label htmlFor="course" className="text-white mb-2">
             Course
           </label>
           <input
@@ -32,10 +54,12 @@ export default function EducationDetails() {
             className="p-3 rounded border border-gray-300"
             id="course"
             placeholder="Course studied"
+            name="Course"
+            onChange={handleOnChange}
           />
         </div>
         <div className="flex flex-col">
-          <label htmlFor="country" className="text-pure-greys-200 mb-2">
+          <label htmlFor="country" className="text-white mb-2">
             Country
           </label>
           <input
@@ -43,10 +67,12 @@ export default function EducationDetails() {
             className="p-3 rounded border border-gray-300"
             id="country"
             placeholder="Country name"
+            onChange={handleOnChange}
+            name="EducationCountry"
           />
         </div>
         <div className="flex flex-col">
-          <label htmlFor="state" className="text-pure-greys-200 mb-2">
+          <label htmlFor="state" className="text-white mb-2">
             State
           </label>
           <input
@@ -54,36 +80,42 @@ export default function EducationDetails() {
             className="p-3 rounded border border-gray-300"
             id="state"
             placeholder="State"
+            onChange={handleOnChange}
+            name="EducationState"
           />
         </div>
       </div>
       <div className="mt-6">
-        <h2 className="text-pure-greys-200 font-medium mb-2">Time Period</h2>
+        <h2 className="text-white font-medium mb-2">Time Period</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="flex flex-col">
-            <label htmlFor="start" className="text-pure-greys-200 mb-2">
+            <label htmlFor="start" className="text-white mb-2">
               Start
             </label>
             <input
-              type="text"
+              type="date"
               className="p-3 rounded border border-gray-300"
               id="start"
               placeholder="MM/YY"
+              onChange={handleOnChange}
+              name="EducationStart"
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="finish" className="text-pure-greys-200 mb-2">
+            <label htmlFor="finish" className="text-white mb-2">
               Finish
             </label>
             <input
-              type="text"
+              type="date"
               className="p-3 rounded border border-gray-300"
               id="finish"
               placeholder="MM/YY"
+              onChange={handleOnChange}
+              name="EducationFinish"
             />
             <div className="flex items-center mt-2">
               <input type="checkbox" className="mr-2" id="currently" />
-              <label htmlFor="currently" className="text-pure-greys-200">
+              <label htmlFor="currently" className="text-white">
                 Currently study here
               </label>
             </div>
@@ -98,7 +130,7 @@ export default function EducationDetails() {
           <ArrowBackIcon />
         </div>
         <button
-          onClick={() => dispatch(setGlobalIndex((globalIndex + 1) % 5))}
+          onClick={() => handleOnsubmit()}
           className="py-3 px-6 bg-blue-400 hover:bg-blue-500 text-white rounded-md transition duration-300"
         >
           Next session

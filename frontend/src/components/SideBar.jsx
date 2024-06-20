@@ -6,13 +6,10 @@ import Experience from "./assets/Experience.jsx";
 import PersonalInfo from "./assets/PersonalInfo.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { setGlobalIndex } from "../redux/slices/globalIndexSlice";
-import { setFormData } from "../redux/slices/resumeSlice.js";
-import CloseIcon from "@mui/icons-material/Close";
-import AddSection from "./assets/AddSection.jsx"; 
+import AddSection from "./assets/AddSection.jsx";
 
-export default function SideBar({ toggleDrawer }) {
+export default function SideBar() {
   const { globalIndex } = useSelector((state) => state.globalIndex);
-  // const { formData } = useSelector((state) => state.formData);
   const dispatch = useDispatch();
   const menuItems = [
     { logo: PersonalInfo, text: "Personal Information" },
@@ -20,15 +17,11 @@ export default function SideBar({ toggleDrawer }) {
     { logo: Experience, text: "Experience" },
     { logo: Contact, text: "Contact Information" },
     { logo: Certification, text: "Award/Certification" },
-    { logo: AddSection ,text:"Add Section"},
+    { logo: AddSection, text: "Add Section" },
   ];
 
   return (
-    <div className="rounded-2xl flex flex-col justify-center items-center bg-richblack-700 w-[379px] h-[90vh] shadow-lg">
-      {/* <CloseIcon
-        onClick={() => toggleDrawer(false)}
-        className="cursor-pointer"
-      /> */}
+    <div className="rounded-2xl flex flex-col justify-center items-center bg-richblack-900 w-[379px] h-[90vh] shadow-lg">
       {menuItems.map((item, index) => (
         <div
           key={index}

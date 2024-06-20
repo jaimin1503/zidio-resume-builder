@@ -7,21 +7,17 @@ import { Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../utils/auth";
 import { setToken } from "../redux/slices/authSlice";
-
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
-
   const handleLogout = () => {
     dispatch(logout());
     window.location.href = "/login";
   };
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -46,7 +42,6 @@ export default function Navbar() {
             />
           </Box>
         </Drawer>
-
         <nav className="w-full flex items-center justify-between text-white">
           <div className="left text-2xl font-bold text-blue-100 cursor-pointer">
             ResumeHub
@@ -56,7 +51,6 @@ export default function Navbar() {
               <Link
                 to={"/"}
                 className=" cursor-pointer hover:text-blue-100 text-md font-light"
-
                 style={{ transition: "0.3s" }}
               >
                 Home
@@ -100,7 +94,7 @@ export default function Navbar() {
               </Link>
             </div>
           ) : (
-            <div className=" mx-4">
+            <div className=" mx-4 hidden lg:flex">
               <button
                 onClick={handleLogout}
                 className=" font-medium py-2 px-4 bg-blue-400 hover:bg-blue-500 rounded-[5px]"
@@ -109,7 +103,6 @@ export default function Navbar() {
               </button>
             </div>
           )}
-
           <div
             onClick={toggleDrawer(true)}
             className=" text-white p-4 lg:hidden cursor-pointer"

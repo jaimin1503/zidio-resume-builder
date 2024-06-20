@@ -10,17 +10,12 @@ import Navbar from "../components/Navbar";
 
 export default function Home() {
   return (
-    <>
-      {/* //       <div className="w-full"> */}
-      <Navbar />
-      <div className="row1 my-10 ">
-        <HomepageHero />
-        {/* <Card />*/}
-        <Features />
-        <HowItWorks />
-        <FAQ />
-        <Footer />
-      </div>
-    </>
+    <div className="w-full my-10">
+      <HomepageHero />
+      <Features />
+      <HowItWorks />
+      <FAQ />
+      <Footer />
+    </div>
   );
 }

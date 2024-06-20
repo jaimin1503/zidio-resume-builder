@@ -1,11 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useDispatch, useSelector } from "react-redux";
 import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
+import { setContactDetails } from "../../redux/slices/resumeSlice";
 
 export default function ContactDetails() {
   const { globalIndex } = useSelector((state) => state.globalIndex);
   const dispatch = useDispatch();
+
+  const [formDetails, setFormDetails] = useState({
+    email: "",
+    phone: "",
+    linkedin: "",
+    twitter: "",
+    instagram: "",
+    portfolio: "",
+    github: "",
+  });
+
+  const handleChange = (e) => {
+    setFormDetails((prv) => ({ ...prv, [e.target.name]: e.target.value }));
+  };
+
+  const handleNext = () => {
+    console.log("submited");
+    dispatch(setContactDetails(formDetails));
+    dispatch(setGlobalIndex((globalIndex + 1) % 5));
+  };
+
   return (
     <div className="p-6 h-full w-full bg-richblack-700 rounded-2xl shadow-lg">
       <div className="flex justify-between items-center mb-6">
@@ -24,6 +46,9 @@ export default function ContactDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="email"
             placeholder="johndoe@gmail.com"
+            value={formDetails.email}
+            onChange={handleChange}
+            name="email"
           />
         </div>
         <div className="flex flex-col">
@@ -31,16 +56,14 @@ export default function ContactDetails() {
             Phone number
           </label>
           <div className="flex items-center border border-gray-300 bg-gray-100 rounded">
-            {/* <img
-              src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_Kingdom.svg"
-              alt="UK Flag"
-              className="w-6 h-4 mr-2"
-            /> */}
             <input
               type="text"
               className="bg-gray-100 text-black w-full p-3"
               id="phone"
               placeholder="1448 90-9 28765"
+              value={formDetails.phone}
+              onChange={handleChange}
+              name="phone"
             />
           </div>
         </div>
@@ -53,6 +76,9 @@ export default function ContactDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="linkedin"
             placeholder="Linkedin/johndoe.com"
+            value={formDetails.linkedin}
+            onChange={handleChange}
+            name="linkedin"
           />
         </div>
         <div className="flex flex-col">
@@ -64,6 +90,9 @@ export default function ContactDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="twitter"
             placeholder="Twitter/johndoe.com"
+            value={formDetails.twitter}
+            onChange={handleChange}
+            name="twitter"
           />
         </div>
         <div className="flex flex-col">
@@ -75,6 +104,9 @@ export default function ContactDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="instagram"
             placeholder="Instagram/johndoe.com"
+            value={formDetails.instagram}
+            onChange={handleChange}
+            name="instagram"
           />
         </div>
         <div className="flex flex-col">
@@ -86,6 +118,9 @@ export default function ContactDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="portfolio"
             placeholder="Johnd.netlify.app"
+            value={formDetails.portfolio}
+            onChange={handleChange}
+            name="portfolio"
           />
         </div>
         <div className="flex flex-col">
@@ -97,6 +132,9 @@ export default function ContactDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="github"
             placeholder="Github/johnie.com"
+            value={formDetails.github}
+            onChange={handleChange}
+            name="github"
           />
         </div>
       </div>
@@ -108,7 +146,7 @@ export default function ContactDetails() {
           <ArrowBackIcon />
         </div>
         <button
-          onClick={() => dispatch(setGlobalIndex((globalIndex + 1) % 5))}
+          onClick={handleNext}
           className="py-3 px-6 bg-blue-400 hover:bg-blue-500 text-white rounded-md transition duration-300"
         >
           Next session

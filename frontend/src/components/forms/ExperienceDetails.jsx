@@ -1,14 +1,37 @@
-import  { useState } from "react";
+import { useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import "react-quill/dist/quill.snow.css"; // import styles for the editor
 import ReactQuill from "react-quill";
 import { useSelector, useDispatch } from "react-redux";
 import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
+import { setExperienceDetails } from "../../redux/slices/resumeSlice";
 
 export default function ExperienceDetails() {
   const [description, setDescription] = useState("");
   const { globalIndex } = useSelector((state) => state.globalIndex);
   const dispatch = useDispatch();
+  const [formdata, setFormdata] = useState({
+    Employer: "",
+    Company: "",
+    EmployerAddress: "",
+    Role: "",
+    EmployerStart: "",
+    EmployerFinish: "",
+    currently: true,
+  });
+
+  const handleOnChange = (e) => {
+    setFormdata((prv) => ({ ...prv, [e.target.name]: e.target.value }));
+  };
+  const handleOnsubmit = (e) => {
+    console.log("submited");
+    const newdata = {
+      ...formdata,
+      Description: description,
+    };
+    dispatch(setExperienceDetails(newdata));
+    dispatch(setGlobalIndex((globalIndex + 1) % 5));
+  };
 
   return (
     <div className="p-6 h-full w-full bg-richblack-700 rounded-2xl shadow-lg">
@@ -26,6 +49,8 @@ export default function ExperienceDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="employer"
             placeholder="Google designers HQ"
+            onChange={handleOnChange}
+            name="Employer"
           />
         </div>
         <div className="flex flex-col">
@@ -37,6 +62,8 @@ export default function ExperienceDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="company"
             placeholder="Alphabet"
+            onChange={handleOnChange}
+            name="Company"
           />
         </div>
         <div className="flex flex-col">
@@ -48,6 +75,8 @@ export default function ExperienceDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="address"
             placeholder="Mountain View, California, United States"
+            onChange={handleOnChange}
+            name="EmployerAddress"
           />
         </div>
         <div className="flex flex-col">
@@ -59,6 +88,8 @@ export default function ExperienceDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="role"
             placeholder="Senior Product designer"
+            onChange={handleOnChange}
+            name="Role"
           />
         </div>
       </div>
@@ -74,6 +105,8 @@ export default function ExperienceDetails() {
               className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
               id="start"
               placeholder="MM/YY"
+              onChange={handleOnChange}
+              name="EmployerStart"
             />
           </div>
           <div className="flex flex-col">
@@ -85,6 +118,8 @@ export default function ExperienceDetails() {
               className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
               id="finish"
               placeholder="MM/YY"
+              onChange={handleOnChange}
+              name="EmployerFinish"
             />
             <div className="flex items-center mt-2">
               <input type="checkbox" className="mr-2" id="currently" />
@@ -114,7 +149,7 @@ export default function ExperienceDetails() {
           <ArrowBackIcon />
         </div>
         <button
-          onClick={() => dispatch(setGlobalIndex((globalIndex + 1) % 5))}
+          onClick={() => handleOnsubmit()}
           className="py-3 px-6 bg-blue-400 hover:bg-blue-500 text-white rounded-md transition duration-300"
         >
           Next session

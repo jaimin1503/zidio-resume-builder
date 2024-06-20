@@ -2,22 +2,45 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   resume: null,
-  formData: {
-    details: {},
-    currentStep: 0,
-  },
+  personalDetails: null,
+  contactDetails: null,
+  educationDetails: null,
+  experienceDetails: null,
+  certificationsDetails: null,
 };
+
 const resumeSlice = createSlice({
   name: "resume",
   initialState,
   reducers: {
-    setResume(state, value) {
-      state.resume = value.payload;
+    setResume(state, action) {
+      state.resume = action.payload;
     },
-    setFormData(state, value) {
-      state.formData = value.payload;
+    setPersonalDetails(state, action) {
+      state.personalDetails = action.payload;
+    },
+    setContactDetails(state, action) {
+      state.contactDetails = action.payload;
+    },
+    setEducationDetails(state, action) {
+      state.educationDetails = action.payload;
+    },
+    setExperienceDetails(state, action) {
+      state.experienceDetails = action.payload;
+    },
+    setCertificationsDetails(state, action) {
+      state.certificationsDetails = action.payload;
     },
   },
 });
-export const { setResume,setFormData } = resumeSlice.actions;
+
+export const {
+  setResume,
+  setPersonalDetails,
+  setContactDetails,
+  setEducationDetails,
+  setExperienceDetails,
+  setCertificationsDetails,
+} = resumeSlice.actions;
+
 export default resumeSlice.reducer;
