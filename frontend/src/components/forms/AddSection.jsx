@@ -3,7 +3,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CloseIcon from "@mui/icons-material/Close"; // Import close icon
 import "react-quill/dist/quill.snow.css"; // import styles for react-quill
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
 import axios from "axios";
 import { setResume } from "../../redux/slices/resumeSlice";
@@ -19,7 +19,7 @@ export default function CertificationDetails() {
   const [newSkill, setNewSkill] = useState("");
   const [newSkillLevel, setNewSkillLevel] = useState("beginner"); // Default to 'beginner'
   const [editSkillIndex, setEditSkillIndex] = useState(null);
-
+  const { index } = useParams();
   const [courses, setCourses] = useState([]);
   const [newCourse, setNewCourse] = useState({
     title: "",
@@ -490,11 +490,11 @@ export default function CertificationDetails() {
           <ArrowBackIcon />
         </div>
         <Link
-          to={"/templates"}
+          to={`/viewResume/${index}/${resume?._id}`}
           // onClick={() => setGlobalIndex((globalIndex + 1) % 5)}
           className="py-3 px-6 bg-blue-400 hover:bg-blue-500 text-white rounded-md transition duration-300"
         >
-          Select template
+          Preview Template
         </Link>
       </div>
       {isPopupOpen && (
