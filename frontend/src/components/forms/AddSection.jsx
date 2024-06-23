@@ -134,19 +134,19 @@ export default function CertificationDetails() {
           const skill = { name: newSkill, level: newSkillLevel };
           setSkills([...skills, skill]);
           console.log("skills section save click");
-          axios
-            .patch(
-              `${import.meta.env.VITE_BASE_URL}/resume/addSection/${
-                resume?._id
-              }`,
-              { skills },
-              { withCredentials: true }
-            )
-            .then((res) => {
-              dispatch(setResume(res.data.resume));
-              toast.success("Skills added succesfully");
-            })
-            .catch((err) => console.error(err));
+          // axios
+          //   .patch(
+          //     `${import.meta.env.VITE_BASE_URL}/resume/addSection/${
+          //       resume?._id
+          //     }`,
+          //     { skills },
+          //     { withCredentials: true }
+          //   )
+          //   .then((res) => {
+          //     dispatch(setResume(res.data.resume));
+          //     toast.success("Skills added succesfully");
+          //   })
+          //   .catch((err) => console.error(err));
         }
         setNewSkill("");
         setNewSkillLevel("beginner"); // Reset level to default after adding skill
