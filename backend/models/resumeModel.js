@@ -57,6 +57,8 @@ const ResumeSchema = new Schema({
   certificationsDetails: {
     type: [CertificationsDetailsSchema],
   },
+  skills: { type: [String], required: true },
+  hobbies: { type: [String] },
 });
 
 export const Resume = mongoose.model("Resume", ResumeSchema);

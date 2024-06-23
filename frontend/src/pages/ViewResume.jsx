@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { setResume } from "../redux/slices/resumeSlice";
 import { useEffect } from "react";
+import Navbar from "../components/Navbar";
 
 const templates = [Template1, Template2, Template3, Template4, Template5];
 
@@ -26,9 +27,12 @@ export default function ViewResume() {
       .catch((err) => console.error(err));
   }, [id]);
   return (
-    <div className=" text-white p-3 sm:p-6">
-      <h1 className=" text-4xl font-bold ">Resume Preview</h1>
-      <TemplateComponent resume={resume} />
-    </div>
+    <>
+      <Navbar />
+      <div className=" text-white p-3 sm:p-6">
+        <h1 className=" text-4xl font-bold ">Resume Preview</h1>
+        <TemplateComponent resume={resume} />
+      </div>
+    </>
   );
 }

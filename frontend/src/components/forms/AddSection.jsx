@@ -1003,3 +1003,4 @@ export default function CertificationDetails() {
 
 );
 }
+

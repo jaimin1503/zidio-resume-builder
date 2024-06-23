@@ -8,6 +8,7 @@ import Template3 from "../components/templates/Template3";
 export default function MyResumes() {
   return (
     <>
+      <Navbar />
       <div className="w-full bg-richblack-900 px-10 py-20 text-white flex flex-col justify-center">
         <h1 className="text-4xl p-4 mb-10 font-bold text-center text-blue-200">
           My Resumes
