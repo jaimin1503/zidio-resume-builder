@@ -5,10 +5,14 @@ import ReactQuill from "react-quill";
 import { useSelector, useDispatch } from "react-redux";
 import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
 import { setExperienceDetails } from "../../redux/slices/resumeSlice";
+import axios from "axios";
+import { setResume } from "../../redux/slices/resumeSlice";
+import toast from "react-hot-toast";
 
 export default function ExperienceDetails() {
   const [description, setDescription] = useState("");
   const { globalIndex } = useSelector((state) => state.globalIndex);
+  const { resume } = useSelector((state) => state.resume);
   const dispatch = useDispatch();
   const [formdata, setFormdata] = useState({
     employer: "",
@@ -30,8 +34,18 @@ export default function ExperienceDetails() {
       ...formdata,
       Description: description,
     };
+    axios
+      .patch(
+        `${import.meta.env.VITE_BASE_URL}/resume/addSection/${resume._id}`,
+        { experienceDetails: newdata },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        dispatch(setResume(res.data.resume));
+        toast.success("Added experience details successfully");
+      });
     dispatch(setExperienceDetails(newdata));
-    dispatch(setGlobalIndex((globalIndex + 1) % 5));
+    dispatch(setGlobalIndex((globalIndex + 1) % 6));
   };
 
   return (

@@ -4,7 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
 import "react-quill/dist/quill.snow.css"; // import styles for the editor
 import ReactQuill from "react-quill";
-import { setPersonalDetails } from "../../redux/slices/resumeSlice";
+import { setPersonalDetails, setResume } from "../../redux/slices/resumeSlice";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function PersonalDetails() {
   const [description, setDescription] = useState("");
@@ -32,12 +34,23 @@ export default function PersonalDetails() {
   };
 
   const handleNextSession = () => {
-    dispatch(setGlobalIndex((globalIndex + 1) % 5));
+    dispatch(setGlobalIndex((globalIndex + 1) % 6));
     console.log("submited");
     const newData = {
       ...formdata,
       Description: description,
     };
+
+    axios
+      .post(
+        `${import.meta.env.VITE_BASE_URL}/resume/createResume`,
+        { personalDetails: newData },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        dispatch(setResume(res.data.data));
+        toast.success(res.data.message);
+      });
     dispatch(setPersonalDetails(newData));
   };
 

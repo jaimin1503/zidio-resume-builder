@@ -1,9 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import template1 from "../assets/template1.png";
 import template2 from "../assets/template2.png";
 import template3 from "../assets/template3.png";
 import Navbar from "../components/Navbar";
+import toast from "react-hot-toast";
 
 export default function Templates() {
   const templates = [
@@ -11,6 +12,14 @@ export default function Templates() {
     { src: template2, alt: "Template 2" },
     { src: template3, alt: "Template 3" },
   ];
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+      toast.error("Please login first");
+    }
+  }, []);
 
   return (
     <>

@@ -1,12 +1,15 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useSelector, useDispatch } from "react-redux";
 import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
-import { setEducationDetails } from "../../redux/slices/resumeSlice";
+import { setEducationDetails, setResume } from "../../redux/slices/resumeSlice";
 import { useState } from "react";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 export default function EducationDetails() {
   const { globalIndex } = useSelector((state) => state.globalIndex);
   const dispatch = useDispatch();
+  const { resume } = useSelector((state) => state.resume);
   const [formdata, setFormdata] = useState({
     institutionName: "",
     course: "",
@@ -21,9 +24,18 @@ export default function EducationDetails() {
   };
   const handleOnsubmit = (e) => {
     console.log("submited");
-
+    axios
+      .patch(
+        `${import.meta.env.VITE_BASE_URL}/resume/addSection/${resume._id}`,
+        { educationDetails: formdata },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        dispatch(setResume(res.data.resume));
+        toast.success("Added education details successfully");
+      });
     dispatch(setEducationDetails(formdata));
-    dispatch(setGlobalIndex((globalIndex + 1) % 5));
+    dispatch(setGlobalIndex((globalIndex + 1) % 6));
   };
   return (
     <div className="p-6 h-full w-full bg-richblack-700 rounded-2xl shadow-lg text-black">

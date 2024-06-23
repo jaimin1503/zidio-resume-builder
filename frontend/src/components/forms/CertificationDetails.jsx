@@ -22,26 +22,7 @@ export default function CertificationDetails() {
     discription: description,
   });
   const navigate = useNavigate();
-  const {
-    personalDetails,
-    contactDetails,
-    educationDetails,
-    experienceDetails,
-    certificationsDetails,
-    resume,
-  } = useSelector((state) => state.resume);
-
-  useEffect(() => {
-    dispatch(
-      setResume({
-        personalDetails,
-        contactDetails,
-        educationDetails,
-        experienceDetails,
-        certificationsDetails,
-      })
-    );
-  }, [dispatch]);
+  const { resume } = useSelector((state) => state.resume);
 
   const handleChange = (e) => {
     setFormDetails((prv) => ({ ...prv, [e.target.name]: e.target.value }));
@@ -52,35 +33,20 @@ export default function CertificationDetails() {
       ...formDetails,
       Description: description,
     };
-
-    dispatch(setCertificationsDetails(newdata));
-    handleSubmit();
-  };
-
-  const handleSubmit = () => {
     const toastId = toast.loading("Loading...");
     axios
-      .post(
-        `${import.meta.env.VITE_BASE_URL}/resume/createResume`,
-        {
-          personalDetails,
-          educationDetails,
-          experienceDetails,
-          contactDetails,
-          certificationsDetails,
-        },
-        {
-          withCredentials: true,
-        }
+      .patch(
+        `${import.meta.env.VITE_BASE_URL}/resume/addSection/${resume._id}`,
+        { certificationDetails: newdata },
+        { withCredentials: true }
       )
       .then((res) => {
-        dispatch(setResume(res.data.data.savedResume));
-        console.log(res.data.data);
-        navigate(`/viewResume/${index}/${res.data.data._id}`);
-        toast.success("Resume created Successfully 🎉");
-      })
-      .catch((error) => console.error(error));
+        dispatch(setResume(res.data.resume));
+        dispatch(setGlobalIndex((globalIndex + 1) % 6));
+        toast.success("Added education details successfully");
+      });
     toast.dismiss(toastId);
+    dispatch(setCertificationsDetails(newdata));
   };
 
   return (

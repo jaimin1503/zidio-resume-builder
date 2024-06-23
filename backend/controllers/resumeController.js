@@ -3,33 +3,15 @@ import { User } from "../models/userModel.js";
 
 export const createResume = async (req, res) => {
   try {
-    const {
-      personalDetails,
-      experienceDetails,
-      educationDetails,
-      contactDetails,
-      certificationsDetails,
-    } = req.body;
+    const { personalDetails } = req.body;
 
-    if (
-      !personalDetails ||
-      !experienceDetails ||
-      !educationDetails ||
-      !contactDetails
-      // !certificationsDetails
-    ) {
+    if (!personalDetails) {
       return res.status(404).json({ message: "fill all details" });
     }
 
-    console.log(personalDetails);
-    // Create a new resume instance
     const newResume = new Resume({
       user: req.user._id,
       personalDetails,
-      experienceDetails,
-      educationDetails,
-      contactDetails,
-      certificationsDetails,
     });
 
     // Save the new resume to the database
@@ -42,7 +24,7 @@ export const createResume = async (req, res) => {
 
     // Return the saved resume in the response
     res.status(201).json({
-      message: "Resume created successfully",
+      message: "Added personal details successfully",
       data: savedResume,
       success: true,
     });
@@ -102,5 +84,43 @@ export const getResume = async (req, res) => {
     res
       .status(500)
       .json({ message: "Something went wrong, please try again later." });
+  }
+};
+
+export const addSection = async (req, res) => {
+  const {
+    skills,
+    educationDetails,
+    experienceDetails,
+    contactDetails,
+    certificationsDetails,
+  } = req.body;
+  const { id } = req.params;
+  console.log(skills);
+  try {
+    const resume = await Resume.findById(id);
+    if (!resume) {
+      return res.status(404).json({ message: "Resume not found" });
+    }
+
+    // Update fields if they exist in the request body
+    if (skills) resume.skills = skills;
+    if (educationDetails) resume.educationDetails = educationDetails;
+    if (experienceDetails) resume.experienceDetails = experienceDetails;
+    if (contactDetails) resume.contactDetails = contactDetails;
+    if (certificationsDetails)
+      resume.certificationsDetails = certificationsDetails;
+
+    // Save the updated resume
+    await resume.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Resume updated successfully",
+      resume,
+    });
+  } catch (error) {
+    console.error("Error updating resume:", error);
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
