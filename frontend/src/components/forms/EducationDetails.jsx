@@ -18,12 +18,20 @@ export default function EducationDetails() {
     educationStart: "",
     educationFinish: "",
   });
+  const [errors, setErrors] = useState({});
 
   const handleOnChange = (e) => {
     setFormdata((prv) => ({ ...prv, [e.target.name]: e.target.value }));
   };
   const handleOnsubmit = (e) => {
-    console.log("submited");
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      toast.error("Please fill out all required fields.");
+      return;
+    }
+
+    console.log("submitted");
     axios
       .patch(
         `${import.meta.env.VITE_BASE_URL}/resume/addSection/${resume._id}`,
@@ -37,6 +45,22 @@ export default function EducationDetails() {
     dispatch(setEducationDetails(formdata));
     dispatch(setGlobalIndex((globalIndex + 1) % 6));
   };
+
+  const validateForm = () => {
+    const errors = {};
+    if (!formdata.institutionName)
+      errors.institutionName = "Institution Name is required";
+    if (!formdata.course) errors.course = "Course is required";
+    if (!formdata.educationCountry)
+      errors.educationCountry = "Country is required";
+    if (!formdata.educationState) errors.educationState = "State is required";
+    if (!formdata.educationStart)
+      errors.educationStart = "Start date is required";
+    if (!formdata.educationFinish && !formdata.currently)
+      errors.educationFinish = "Finish date is required";
+    return errors;
+  };
+
   return (
     <div className="p-6 h-full w-full bg-richblack-700 rounded-2xl shadow-lg text-black">
       <div className="flex justify-between items-center mb-6">
@@ -56,6 +80,9 @@ export default function EducationDetails() {
             onChange={handleOnChange}
             name="institutionName"
           />
+          {errors.institutionName && (
+            <span className="text-red-100">{errors.institutionName}</span>
+          )}
         </div>
         <div className="flex flex-col">
           <label htmlFor="course" className="text-white mb-2">
@@ -69,6 +96,9 @@ export default function EducationDetails() {
             name="course"
             onChange={handleOnChange}
           />
+          {errors.course && (
+            <span className="text-red-100">{errors.course}</span>
+          )}
         </div>
         <div className="flex flex-col">
           <label htmlFor="country" className="text-white mb-2">
@@ -82,6 +112,9 @@ export default function EducationDetails() {
             onChange={handleOnChange}
             name="educationCountry"
           />
+          {errors.educationCountry && (
+            <span className="text-red-100">{errors.educationCountry}</span>
+          )}
         </div>
         <div className="flex flex-col">
           <label htmlFor="state" className="text-white mb-2">
@@ -95,6 +128,9 @@ export default function EducationDetails() {
             onChange={handleOnChange}
             name="educationState"
           />
+          {errors.educationState && (
+            <span className="text-red-100">{errors.educationState}</span>
+          )}
         </div>
       </div>
       <div className="mt-6">
@@ -112,6 +148,9 @@ export default function EducationDetails() {
               onChange={handleOnChange}
               name="educationStart"
             />
+            {errors.educationStart && (
+              <span className="text-red-100">{errors.educationStart}</span>
+            )}
           </div>
           <div className="flex flex-col">
             <label htmlFor="finish" className="text-white mb-2">
@@ -125,8 +164,17 @@ export default function EducationDetails() {
               onChange={handleOnChange}
               name="educationFinish"
             />
+            {errors.educationFinish && (
+              <span className="text-red-100">{errors.educationFinish}</span>
+            )}
             <div className="flex items-center mt-2">
-              <input type="checkbox" className="mr-2" id="currently" />
+              <input
+                type="checkbox"
+                className="mr-2"
+                id="currently"
+                name="currently"
+                onChange={handleOnChange}
+              />
               <label htmlFor="currently" className="text-white">
                 Currently study here
               </label>
@@ -142,7 +190,7 @@ export default function EducationDetails() {
           <ArrowBackIcon />
         </div>
         <button
-          onClick={() => handleOnsubmit()}
+          onClick={handleOnsubmit}
           className="py-3 px-6 bg-blue-400 hover:bg-blue-500 text-white rounded-md transition duration-300"
         >
           Next session

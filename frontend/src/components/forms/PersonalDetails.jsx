@@ -24,6 +24,7 @@ export default function PersonalDetails() {
     zipCode: "",
     discription: description,
   });
+  const [errors, setErrors] = useState({});
 
   const handleOnChange = (e) => {
     setFormdata((prv) => ({ ...prv, [e.target.name]: e.target.value }));
@@ -34,11 +35,18 @@ export default function PersonalDetails() {
   };
 
   const handleNextSession = () => {
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      toast.error("Please fill out all required fields.");
+      return;
+    }
+
     dispatch(setGlobalIndex((globalIndex + 1) % 6));
-    console.log("submited");
+    console.log("submitted");
     const newData = {
       ...formdata,
-      Description: description,
+      description,
     };
 
     axios
@@ -52,6 +60,19 @@ export default function PersonalDetails() {
         toast.success(res.data.message);
       });
     dispatch(setPersonalDetails(newData));
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    if (!formdata.firstName) errors.firstName = "First name is required";
+    if (!formdata.lastName) errors.lastName = "Last name is required";
+    if (!formdata.profession) errors.profession = "Profession is required";
+    if (!formdata.address) errors.address = "Address is required";
+    if (!formdata.city) errors.city = "City is required";
+    if (!formdata.state) errors.state = "State is required";
+    if (!formdata.zipCode) errors.zipCode = "Zip code is required";
+    if (!description) errors.description = "Description is required";
+    return errors;
   };
 
   const handleUploadClick = () => {
@@ -77,6 +98,9 @@ export default function PersonalDetails() {
             name="firstName"
             onChange={handleOnChange}
           />
+          {errors.firstName && (
+            <span className="text-red-100">{errors.firstName}</span>
+          )}
         </div>
         <div className="flex flex-col">
           <label htmlFor="lastname" className="text-gray-700 mb-2">
@@ -90,6 +114,9 @@ export default function PersonalDetails() {
             name="lastName"
             onChange={handleOnChange}
           />
+          {errors.lastName && (
+            <span className="text-red-100">{errors.lastName}</span>
+          )}
         </div>
         <div className="flex flex-col">
           <label htmlFor="profession" className="text-gray-700 mb-2">
@@ -103,6 +130,9 @@ export default function PersonalDetails() {
             name="profession"
             onChange={handleOnChange}
           />
+          {errors.profession && (
+            <span className="text-red-100">{errors.profession}</span>
+          )}
         </div>
         <div className="flex flex-col">
           <label htmlFor="address" className="text-gray-700 mb-2">
@@ -116,6 +146,9 @@ export default function PersonalDetails() {
             name="address"
             onChange={handleOnChange}
           />
+          {errors.address && (
+            <span className="text-red-100">{errors.address}</span>
+          )}
         </div>
         <div className="flex flex-col">
           <label htmlFor="city" className="text-gray-700 mb-2">
@@ -129,6 +162,7 @@ export default function PersonalDetails() {
             name="city"
             onChange={handleOnChange}
           />
+          {errors.city && <span className="text-red-100">{errors.city}</span>}
         </div>
         <div className="flex flex-col">
           <label htmlFor="state" className="text-gray-700 mb-2">
@@ -142,6 +176,7 @@ export default function PersonalDetails() {
             name="state"
             onChange={handleOnChange}
           />
+          {errors.state && <span className="text-red-100">{errors.state}</span>}
         </div>
         <div className="flex flex-col">
           <label htmlFor="zip" className="text-gray-700 mb-2">
@@ -155,6 +190,9 @@ export default function PersonalDetails() {
             name="zipCode"
             onChange={handleOnChange}
           />
+          {errors.zipCode && (
+            <span className="text-red-100">{errors.zipCode}</span>
+          )}
         </div>
         <div className="flex flex-col">
           <label htmlFor="fileUpload" className=" text-white mb-2">
@@ -192,6 +230,9 @@ export default function PersonalDetails() {
           className="bg-white text-black"
           style={{ width: "100%", height: "100%", marginTop: "0.5rem" }}
         />
+        {errors.description && (
+          <span className="text-red-100">{errors.description}</span>
+        )}
       </div>
       <div className="flex justify-between items-center mt-10">
         <div className="py-[0.7rem] px-3 text-gray-500 hover:text-black hover:bg-gray-200 rounded-full transition duration-300 cursor-not-allowed">

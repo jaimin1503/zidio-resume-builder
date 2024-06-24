@@ -24,15 +24,23 @@ export default function ExperienceDetails() {
     currently: true,
     discription: description,
   });
+  const [errors, setErrors] = useState({});
 
   const handleOnChange = (e) => {
     setFormdata((prv) => ({ ...prv, [e.target.name]: e.target.value }));
   };
   const handleOnsubmit = (e) => {
-    console.log("submited");
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      toast.error("Please fill out all required fields.");
+      return;
+    }
+
+    console.log("submitted");
     const newdata = {
       ...formdata,
-      Description: description,
+      description,
     };
     axios
       .patch(
@@ -46,6 +54,21 @@ export default function ExperienceDetails() {
       });
     dispatch(setExperienceDetails(newdata));
     dispatch(setGlobalIndex((globalIndex + 1) % 6));
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    if (!formdata.employer) errors.employer = "Employer is required";
+    if (!formdata.company) errors.company = "Company is required";
+    if (!formdata.employerAddress)
+      errors.employerAddress = "Address is required";
+    if (!formdata.role) errors.role = "Role is required";
+    if (!formdata.employerStart)
+      errors.employerStart = "Start date is required";
+    if (!formdata.employerFinish && !formdata.currently)
+      errors.employerFinish = "Finish date is required";
+    if (!description) errors.description = "Description is required";
+    return errors;
   };
 
   return (
@@ -67,6 +90,9 @@ export default function ExperienceDetails() {
             onChange={handleOnChange}
             name="employer"
           />
+          {errors.employer && (
+            <span className="text-red-100">{errors.employer}</span>
+          )}
         </div>
         <div className="flex flex-col">
           <label htmlFor="company" className="text-gray-700 mb-2">
@@ -80,6 +106,9 @@ export default function ExperienceDetails() {
             onChange={handleOnChange}
             name="company"
           />
+          {errors.company && (
+            <span className="text-red-100">{errors.company}</span>
+          )}
         </div>
         <div className="flex flex-col">
           <label htmlFor="address" className="text-gray-700 mb-2">
@@ -93,6 +122,9 @@ export default function ExperienceDetails() {
             onChange={handleOnChange}
             name="employerAddress"
           />
+          {errors.employerAddress && (
+            <span className="text-red-100">{errors.employerAddress}</span>
+          )}
         </div>
         <div className="flex flex-col">
           <label htmlFor="role" className="text-gray-700 mb-2">
@@ -106,6 +138,7 @@ export default function ExperienceDetails() {
             onChange={handleOnChange}
             name="role"
           />
+          {errors.role && <span className="text-red-100">{errors.role}</span>}
         </div>
       </div>
       <div className="mt-6">
@@ -123,6 +156,9 @@ export default function ExperienceDetails() {
               onChange={handleOnChange}
               name="employerStart"
             />
+            {errors.employerStart && (
+              <span className="text-red-100">{errors.employerStart}</span>
+            )}
           </div>
           <div className="flex flex-col">
             <label htmlFor="finish" className="text-gray-700 mb-2">
@@ -136,8 +172,17 @@ export default function ExperienceDetails() {
               onChange={handleOnChange}
               name="employerFinish"
             />
+            {errors.employerFinish && (
+              <span className="text-red-100">{errors.employerFinish}</span>
+            )}
             <div className="flex items-center mt-2">
-              <input type="checkbox" className="mr-2" id="currently" />
+              <input
+                type="checkbox"
+                className="mr-2"
+                id="currently"
+                name="currently"
+                onChange={handleOnChange}
+              />
               <label htmlFor="currently" className="text-gray-700">
                 Currently work here
               </label>
@@ -153,8 +198,11 @@ export default function ExperienceDetails() {
           theme="snow"
           value={description}
           onChange={setDescription}
-          className=" bg-white text-black"
+          className="bg-white text-black"
         />
+        {errors.description && (
+          <span className="text-red-100">{errors.description}</span>
+        )}
       </div>
       <div className="flex justify-between items-center mt-10">
         <div
@@ -164,7 +212,7 @@ export default function ExperienceDetails() {
           <ArrowBackIcon />
         </div>
         <button
-          onClick={() => handleOnsubmit()}
+          onClick={handleOnsubmit}
           className="py-3 px-6 bg-blue-400 hover:bg-blue-500 text-white rounded-md transition duration-300"
         >
           Next session

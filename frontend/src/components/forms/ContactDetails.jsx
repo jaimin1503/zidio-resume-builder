@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useDispatch, useSelector } from "react-redux";
 import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
-import { setContactDetails } from "../../redux/slices/resumeSlice";
+import { setContactDetails, setResume } from "../../redux/slices/resumeSlice";
 import axios from "axios";
-import { setResume } from "../../redux/slices/resumeSlice";
 import toast from "react-hot-toast";
 
 export default function ContactDetails() {
@@ -20,13 +19,21 @@ export default function ContactDetails() {
     portfolio: "",
     github: "",
   });
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     setFormDetails((prv) => ({ ...prv, [e.target.name]: e.target.value }));
   };
 
   const handleNext = () => {
-    console.log("submited");
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      toast.error("Please fill out all required fields.");
+      return;
+    }
+
+    console.log("submitted");
     axios
       .patch(
         `${import.meta.env.VITE_BASE_URL}/resume/addSection/${resume._id}`,
@@ -35,10 +42,19 @@ export default function ContactDetails() {
       )
       .then((res) => {
         dispatch(setResume(res.data.resume));
-        toast.success("Added education details successfully");
+        toast.success("Added contact details successfully");
       });
     dispatch(setContactDetails(formDetails));
     dispatch(setGlobalIndex((globalIndex + 1) % 6));
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    if (!formDetails.email) errors.email = "Email is required";
+    if (!formDetails.phone) errors.phone = "Phone number is required";
+    if (!formDetails.linkedin)
+      errors.linkedin = "LinkedIn profile link is required";
+    return errors;
   };
 
   return (
@@ -63,6 +79,7 @@ export default function ContactDetails() {
             onChange={handleChange}
             name="email"
           />
+          {errors.email && <span className="text-red-100">{errors.email}</span>}
         </div>
         <div className="flex flex-col">
           <label htmlFor="phone" className="text-gray-700 mb-2">
@@ -79,10 +96,11 @@ export default function ContactDetails() {
               name="phone"
             />
           </div>
+          {errors.phone && <span className="text-red-100">{errors.phone}</span>}
         </div>
         <div className="flex flex-col">
           <label htmlFor="linkedin" className="text-gray-700 mb-2">
-            Linkedin Profile link
+            LinkedIn Profile link
           </label>
           <input
             type="text"
@@ -93,6 +111,9 @@ export default function ContactDetails() {
             onChange={handleChange}
             name="linkedin"
           />
+          {errors.linkedin && (
+            <span className="text-red-100">{errors.linkedin}</span>
+          )}
         </div>
         <div className="flex flex-col">
           <label htmlFor="twitter" className="text-gray-700 mb-2">
@@ -138,13 +159,13 @@ export default function ContactDetails() {
         </div>
         <div className="flex flex-col">
           <label htmlFor="github" className="text-gray-700 mb-2">
-            Github profile link
+            GitHub profile link
           </label>
           <input
             type="text"
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="github"
-            placeholder="Github/johnie.com"
+            placeholder="GitHub/johnie.com"
             value={formDetails.github}
             onChange={handleChange}
             name="github"
