@@ -13,8 +13,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["https://pro-resume-hub.vercel.app","http://localhost:5173"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: ["https://pro-resume-hub.vercel.app", "http://localhost:5173"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
   })
 );

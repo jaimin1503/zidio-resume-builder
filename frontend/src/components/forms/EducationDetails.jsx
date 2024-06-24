@@ -1,19 +1,22 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useSelector, useDispatch } from "react-redux";
 import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
-import { setEducationDetails } from "../../redux/slices/resumeSlice";
+import { setEducationDetails, setResume } from "../../redux/slices/resumeSlice";
 import { useState } from "react";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 export default function EducationDetails() {
   const { globalIndex } = useSelector((state) => state.globalIndex);
   const dispatch = useDispatch();
+  const { resume } = useSelector((state) => state.resume);
   const [formdata, setFormdata] = useState({
-    InstitutionName: "",
-    Course: "",
-    EducationCountry: "",
-    EducationState: "",
-    EducationStart: "",
-    EducationFinish: "",
+    institutionName: "",
+    course: "",
+    educationCountry: "",
+    educationState: "",
+    educationStart: "",
+    educationFinish: "",
   });
 
   const handleOnChange = (e) => {
@@ -21,9 +24,18 @@ export default function EducationDetails() {
   };
   const handleOnsubmit = (e) => {
     console.log("submited");
-
+    axios
+      .patch(
+        `${import.meta.env.VITE_BASE_URL}/resume/addSection/${resume._id}`,
+        { educationDetails: formdata },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        dispatch(setResume(res.data.resume));
+        toast.success("Added education details successfully");
+      });
     dispatch(setEducationDetails(formdata));
-    dispatch(setGlobalIndex((globalIndex + 1) % 5));
+    dispatch(setGlobalIndex((globalIndex + 1) % 6));
   };
   return (
     <div className="p-6 h-full w-full bg-richblack-700 rounded-2xl shadow-lg text-black">
@@ -42,7 +54,7 @@ export default function EducationDetails() {
             id="institution"
             placeholder="Name of school"
             onChange={handleOnChange}
-            name="InstitutionName"
+            name="institutionName"
           />
         </div>
         <div className="flex flex-col">
@@ -54,7 +66,7 @@ export default function EducationDetails() {
             className="p-3 rounded border border-gray-300"
             id="course"
             placeholder="Course studied"
-            name="Course"
+            name="course"
             onChange={handleOnChange}
           />
         </div>
@@ -68,7 +80,7 @@ export default function EducationDetails() {
             id="country"
             placeholder="Country name"
             onChange={handleOnChange}
-            name="EducationCountry"
+            name="educationCountry"
           />
         </div>
         <div className="flex flex-col">
@@ -81,7 +93,7 @@ export default function EducationDetails() {
             id="state"
             placeholder="State"
             onChange={handleOnChange}
-            name="EducationState"
+            name="educationState"
           />
         </div>
       </div>
@@ -98,7 +110,7 @@ export default function EducationDetails() {
               id="start"
               placeholder="MM/YY"
               onChange={handleOnChange}
-              name="EducationStart"
+              name="educationStart"
             />
           </div>
           <div className="flex flex-col">
@@ -111,7 +123,7 @@ export default function EducationDetails() {
               id="finish"
               placeholder="MM/YY"
               onChange={handleOnChange}
-              name="EducationFinish"
+              name="educationFinish"
             />
             <div className="flex items-center mt-2">
               <input type="checkbox" className="mr-2" id="currently" />

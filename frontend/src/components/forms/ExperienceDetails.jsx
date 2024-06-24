@@ -5,19 +5,24 @@ import ReactQuill from "react-quill";
 import { useSelector, useDispatch } from "react-redux";
 import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
 import { setExperienceDetails } from "../../redux/slices/resumeSlice";
+import axios from "axios";
+import { setResume } from "../../redux/slices/resumeSlice";
+import toast from "react-hot-toast";
 
 export default function ExperienceDetails() {
   const [description, setDescription] = useState("");
   const { globalIndex } = useSelector((state) => state.globalIndex);
+  const { resume } = useSelector((state) => state.resume);
   const dispatch = useDispatch();
   const [formdata, setFormdata] = useState({
-    Employer: "",
-    Company: "",
-    EmployerAddress: "",
-    Role: "",
-    EmployerStart: "",
-    EmployerFinish: "",
+    employer: "",
+    company: "",
+    employerAddress: "",
+    role: "",
+    employerStart: "",
+    employerFinish: "",
     currently: true,
+    discription: description,
   });
 
   const handleOnChange = (e) => {
@@ -29,8 +34,18 @@ export default function ExperienceDetails() {
       ...formdata,
       Description: description,
     };
+    axios
+      .patch(
+        `${import.meta.env.VITE_BASE_URL}/resume/addSection/${resume._id}`,
+        { experienceDetails: newdata },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        dispatch(setResume(res.data.resume));
+        toast.success("Added experience details successfully");
+      });
     dispatch(setExperienceDetails(newdata));
-    dispatch(setGlobalIndex((globalIndex + 1) % 5));
+    dispatch(setGlobalIndex((globalIndex + 1) % 6));
   };
 
   return (
@@ -50,7 +65,7 @@ export default function ExperienceDetails() {
             id="employer"
             placeholder="Google designers HQ"
             onChange={handleOnChange}
-            name="Employer"
+            name="employer"
           />
         </div>
         <div className="flex flex-col">
@@ -63,7 +78,7 @@ export default function ExperienceDetails() {
             id="company"
             placeholder="Alphabet"
             onChange={handleOnChange}
-            name="Company"
+            name="company"
           />
         </div>
         <div className="flex flex-col">
@@ -76,7 +91,7 @@ export default function ExperienceDetails() {
             id="address"
             placeholder="Mountain View, California, United States"
             onChange={handleOnChange}
-            name="EmployerAddress"
+            name="employerAddress"
           />
         </div>
         <div className="flex flex-col">
@@ -89,7 +104,7 @@ export default function ExperienceDetails() {
             id="role"
             placeholder="Senior Product designer"
             onChange={handleOnChange}
-            name="Role"
+            name="role"
           />
         </div>
       </div>
@@ -106,7 +121,7 @@ export default function ExperienceDetails() {
               id="start"
               placeholder="MM/YY"
               onChange={handleOnChange}
-              name="EmployerStart"
+              name="employerStart"
             />
           </div>
           <div className="flex flex-col">
@@ -119,7 +134,7 @@ export default function ExperienceDetails() {
               id="finish"
               placeholder="MM/YY"
               onChange={handleOnChange}
-              name="EmployerFinish"
+              name="employerFinish"
             />
             <div className="flex items-center mt-2">
               <input type="checkbox" className="mr-2" id="currently" />

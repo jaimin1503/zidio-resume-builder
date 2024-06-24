@@ -4,7 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
 import "react-quill/dist/quill.snow.css"; // import styles for the editor
 import ReactQuill from "react-quill";
-import { setPersonalDetails } from "../../redux/slices/resumeSlice";
+import { setPersonalDetails, setResume } from "../../redux/slices/resumeSlice";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function PersonalDetails() {
   const [description, setDescription] = useState("");
@@ -15,11 +17,12 @@ export default function PersonalDetails() {
   const [formdata, setFormdata] = useState({
     firstName: "",
     lastName: "",
-    Profession: "",
-    Address: "",
-    City: "",
-    State: "",
-    ZipCode: "",
+    profession: "",
+    address: "",
+    city: "",
+    state: "",
+    zipCode: "",
+    discription: description,
   });
 
   const handleOnChange = (e) => {
@@ -31,12 +34,23 @@ export default function PersonalDetails() {
   };
 
   const handleNextSession = () => {
-    dispatch(setGlobalIndex((globalIndex + 1) % 5));
+    dispatch(setGlobalIndex((globalIndex + 1) % 6));
     console.log("submited");
     const newData = {
       ...formdata,
       Description: description,
     };
+
+    axios
+      .post(
+        `${import.meta.env.VITE_BASE_URL}/resume/createResume`,
+        { personalDetails: newData },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        dispatch(setResume(res.data.data));
+        toast.success(res.data.message);
+      });
     dispatch(setPersonalDetails(newData));
   };
 
@@ -86,7 +100,7 @@ export default function PersonalDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="profession"
             placeholder="Software Engineer"
-            name="Profession"
+            name="profession"
             onChange={handleOnChange}
           />
         </div>
@@ -99,7 +113,7 @@ export default function PersonalDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="address"
             placeholder="St James street New Jersey"
-            name="Address"
+            name="address"
             onChange={handleOnChange}
           />
         </div>
@@ -112,7 +126,7 @@ export default function PersonalDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="city"
             placeholder="Janes Inn"
-            name="City"
+            name="city"
             onChange={handleOnChange}
           />
         </div>
@@ -125,7 +139,7 @@ export default function PersonalDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="state"
             placeholder="New Jersey"
-            name="State"
+            name="state"
             onChange={handleOnChange}
           />
         </div>
@@ -138,7 +152,7 @@ export default function PersonalDetails() {
             className="p-3 rounded border border-gray-300 bg-gray-100 text-black"
             id="zip"
             placeholder="123789"
-            name="ZipCode"
+            name="zipCode"
             onChange={handleOnChange}
           />
         </div>

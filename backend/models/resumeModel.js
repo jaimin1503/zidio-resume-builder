@@ -9,6 +9,7 @@ const PersonalDetailsSchema = new Schema({
   city: { type: String, required: true },
   state: { type: String, required: true },
   zipCode: { type: String, required: true },
+  description: { type: String },
 });
 
 const ExperienceDetailsSchema = new Schema({
@@ -19,6 +20,7 @@ const ExperienceDetailsSchema = new Schema({
   employerStart: { type: Date, required: true },
   employerFinish: { type: Date },
   currently: { type: Boolean, default: true },
+  description: { type: String },
 });
 
 const EducationDetailsSchema = new Schema({
@@ -41,20 +43,48 @@ const ContactDetailsSchema = new Schema({
 });
 
 const CertificationsDetailsSchema = new Schema({
-  organization: { type: String, required: true },
-  title: { type: String, required: true },
-  date: { type: Date, required: true },
+  organization: { type: String },
+  title: { type: String },
+  date: { type: Date },
+  description: { type: String },
+});
+
+const InternshipDetailsSchema = new Schema({
+  jobRole: { type: String },
+  company: { type: String },
+  startDate: { type: Date },
+  endDate: { type: Date },
+  desctiption: { type: String },
+});
+
+const courcesSchema = new Schema({
+  title: { type: String },
+  organization: { type: String },
+  startDate: { type: Date },
+  endDate: { type: Date },
+  description: { type: String },
 });
 
 const ResumeSchema = new Schema({
   personalDetails: { type: PersonalDetailsSchema, required: true },
-  experienceDetails: { type: [ExperienceDetailsSchema], required: true },
-  educationDetails: { type: [EducationDetailsSchema], required: true },
-  contactDetails: { type: ContactDetailsSchema, required: true },
+  experienceDetails: { type: [ExperienceDetailsSchema] },
+  educationDetails: { type: [EducationDetailsSchema] },
+  contactDetails: { type: ContactDetailsSchema },
   certificationsDetails: {
     type: [CertificationsDetailsSchema],
+  },
+  skills: {
+    type: [
+      {
+        name: String,
+        level: String,
+      },
+    ],
     required: true,
   },
+  hobbies: { type: [String] },
+  internship: { type: InternshipDetailsSchema },
+  cources: [{ type: courcesSchema }],
 });
 
 export const Resume = mongoose.model("Resume", ResumeSchema);

@@ -8,6 +8,7 @@ import { setCertificationsDetails } from "../../redux/slices/resumeSlice"; // Im
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { setResume } from "../../redux/slices/resumeSlice";
+import toast from "react-hot-toast";
 
 export default function CertificationDetails() {
   const { globalIndex } = useSelector((state) => state.globalIndex);
@@ -18,43 +19,13 @@ export default function CertificationDetails() {
     organization: "",
     title: "",
     date: "",
+    discription: description,
   });
   const navigate = useNavigate();
-  const {
-    personalDetails,
-    contactDetails,
-    educationDetails,
-    experienceDetails,
-    certificationsDetails,
-    resume,
-  } = useSelector((state) => state.resume);
-
-  useEffect(() => {
-    dispatch(
-      setResume({
-        personalDetails,
-        contactDetails,
-        educationDetails,
-        experienceDetails,
-        certificationsDetails,
-      })
-    );
-  }, [dispatch]);
+  const { resume } = useSelector((state) => state.resume);
 
   const handleChange = (e) => {
     setFormDetails((prv) => ({ ...prv, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = () => {
-    axios
-      .post(`${import.meta.env.VITE_BASE_URL}/resume/createResume`, resume, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        dispatch(setResume(res.data.savedResume));
-        console.log(res.data.message);
-      })
-      .catch((error) => console.error(error));
   };
 
   const handleNext = () => {
@@ -62,9 +33,20 @@ export default function CertificationDetails() {
       ...formDetails,
       Description: description,
     };
-    navigate(`/viewResume/${index}`);
+    const toastId = toast.loading("Loading...");
+    axios
+      .patch(
+        `${import.meta.env.VITE_BASE_URL}/resume/addSection/${resume._id}`,
+        { certificationDetails: newdata },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        dispatch(setResume(res.data.resume));
+        dispatch(setGlobalIndex((globalIndex + 1) % 6));
+        toast.success("Added education details successfully");
+      });
+    toast.dismiss(toastId);
     dispatch(setCertificationsDetails(newdata));
-    handleSubmit();
   };
 
   return (

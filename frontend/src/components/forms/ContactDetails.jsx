@@ -3,11 +3,14 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useDispatch, useSelector } from "react-redux";
 import { setGlobalIndex } from "../../redux/slices/globalIndexSlice";
 import { setContactDetails } from "../../redux/slices/resumeSlice";
+import axios from "axios";
+import { setResume } from "../../redux/slices/resumeSlice";
+import toast from "react-hot-toast";
 
 export default function ContactDetails() {
   const { globalIndex } = useSelector((state) => state.globalIndex);
   const dispatch = useDispatch();
-
+  const { resume } = useSelector((state) => state.resume);
   const [formDetails, setFormDetails] = useState({
     email: "",
     phone: "",
@@ -24,8 +27,18 @@ export default function ContactDetails() {
 
   const handleNext = () => {
     console.log("submited");
+    axios
+      .patch(
+        `${import.meta.env.VITE_BASE_URL}/resume/addSection/${resume._id}`,
+        { contactDetails: formDetails },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        dispatch(setResume(res.data.resume));
+        toast.success("Added education details successfully");
+      });
     dispatch(setContactDetails(formDetails));
-    dispatch(setGlobalIndex((globalIndex + 1) % 5));
+    dispatch(setGlobalIndex((globalIndex + 1) % 6));
   };
 
   return (
