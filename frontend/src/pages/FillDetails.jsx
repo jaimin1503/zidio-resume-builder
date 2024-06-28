@@ -17,7 +17,7 @@ export default function FillDetails() {
       </Link>
     </div> */}
         <div className=" flex w-screen">
-          <div className=" hidden lg:block">
+          <div className=" hidden lg:block mt-3">
             <SideBar />
           </div>
           <FormContainer />
