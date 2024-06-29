@@ -21,7 +21,7 @@ export default function SideBar() {
   ];
 
   return (
-    <div className="rounded-2xl flex flex-col justify-center items-center bg-richblack-900 w-[379px] h-[90vh] shadow-lg">
+    <div className="rounded-2xl flex flex-col mt-10 justify-center items-center bg-richblack-900 w-[379px] h-[90vh] shadow-lg">
       {menuItems.map((item, index) => (
         <div
           key={index}

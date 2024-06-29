@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 export default function PersonalDetails() {
   const [description, setDescription] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const [filePreview, setFilePreview] = useState(null);
   const fileInputRef = useRef(null);
   const { globalIndex } = useSelector((state) => state.globalIndex);
   const dispatch = useDispatch();
@@ -30,7 +31,9 @@ export default function PersonalDetails() {
   };
 
   const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
+    const file = event.target.files[0];
+    setSelectedFile(file);
+    setFilePreview(URL.createObjectURL(file));
   };
 
   const handleNextSession = () => {
@@ -162,7 +165,7 @@ export default function PersonalDetails() {
           </label>
           <button
             onClick={handleUploadClick}
-            className="p-3 rounded border border-gray-300 bg-gray-100 text-blue-200"
+            className="p-3 rounded border border-gray-300 bg-gray-100 text-blue-200 hover:bg-blue-200 hover:border-white hover:text-white"
           >
             Choose File
           </button>
@@ -177,6 +180,13 @@ export default function PersonalDetails() {
           {selectedFile && (
             <div className="mt-2 text-white">
               Selected file: {selectedFile.name}
+              <div className="mt-2">
+                <img
+                  src={filePreview}
+                  alt="Preview"
+                  className="max-w-full max-h-48 object-cover rounded-lg"
+                />
+              </div>
             </div>
           )}
         </div>
