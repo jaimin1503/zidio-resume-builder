@@ -68,24 +68,28 @@ export const editResume = async (req, res) => {
 export const getResume = async (req, res) => {
   try {
     const id = req.params.id;
-    if (!id) {
-      return res.status(404).json({ message: "resume id not found" });
+
+    console.log("Received resume ID:", id);
+
+    if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid resume ID" });
     }
+
     const resume = await Resume.findById(id);
     if (!resume) {
-      return res.status(404).json({ message: "resume not found" });
+      return res.status(404).json({ message: "Resume not found" });
     }
+
     res.status(200).json({
-      message: "resume found",
+      message: "Resume found",
       resume,
     });
   } catch (error) {
-    console.error(error);
-    res
-      .status(500)
-      .json({ message: "Something went wrong, please try again later." });
+    console.error("Error fetching resume:", error);
+    res.status(500).json({ message: "Something went wrong, please try again later." });
   }
 };
+
 
 export const addSection = async (req, res) => {
   const {

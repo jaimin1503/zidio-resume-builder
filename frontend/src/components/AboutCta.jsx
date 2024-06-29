@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import cvImage2 from "../assets/cvimage2.png";
 
 export default function AboutCta() {
   return (
