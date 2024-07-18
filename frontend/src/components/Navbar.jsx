@@ -62,12 +62,13 @@ export default function Navbar() {
               >
                 Templates
               </Link>
-              <li
+              <Link
+                to={"/myresumes"}
                 className=" cursor-pointer hover:text-blue-100 textmd font-light"
                 style={{ transition: "0.3s" }}
               >
-                JoinResumeHub
-              </li>
+                My Resumes
+              </Link>
               <Link
                 to={"/about"}
                 className=" cursor-pointer hover:text-blue-100 text-md font-light"

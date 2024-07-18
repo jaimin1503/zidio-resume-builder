@@ -85,6 +85,8 @@ const ResumeSchema = new Schema({
   hobbies: { type: [String] },
   internship: { type: InternshipDetailsSchema },
   cources: [{ type: courcesSchema }],
+  complete: { type: Boolean, default: false },
+  user: { type: Schema.Types.ObjectId, ref: "User" },
 });
 
 export const Resume = mongoose.model("Resume", ResumeSchema);

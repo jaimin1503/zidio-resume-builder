@@ -37,7 +37,7 @@ export default function ContactDetails() {
     axios
       .patch(
         `${import.meta.env.VITE_BASE_URL}/resume/addSection/${resume._id}`,
-        { contactDetails: formDetails },
+        { contactDetails: formDetails, completed: true },
         { withCredentials: true }
       )
       .then((res) => {

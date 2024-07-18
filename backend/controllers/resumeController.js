@@ -86,10 +86,11 @@ export const getResume = async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching resume:", error);
-    res.status(500).json({ message: "Something went wrong, please try again later." });
+    res
+      .status(500)
+      .json({ message: "Something went wrong, please try again later." });
   }
 };
-
 
 export const addSection = async (req, res) => {
   const {
@@ -126,5 +127,31 @@ export const addSection = async (req, res) => {
   } catch (error) {
     console.error("Error updating resume:", error);
     return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export const getResumes = async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    if (!userId) {
+      return res.status(400).json({
+        message: "user not found",
+      });
+    }
+    const resumes = await Resume.find({ user: userId });
+
+    if (!resumes) {
+      return res.status(404).json({ message: "Resume not found" });
+    }
+    res.status(200).json({
+      message: "Resumes found",
+      data: resumes,
+    });
+  } catch (error) {
+    console.error("Error fetching resumes:", error);
+    res
+      .status(500)
+      .json({ message: "Something went wrong, please try again later." });
   }
 };
