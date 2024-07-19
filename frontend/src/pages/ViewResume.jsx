@@ -26,6 +26,8 @@ export default function ViewResume() {
       .then((res) => dispatch(setResume(res.data.resume)))
       .catch((err) => console.error(err));
   }, [id]);
+
+  console.log(resume);
   return (
     <>
       <Navbar />

@@ -12,14 +12,19 @@ const Template3 = ({ resume }) => {
               " " +
               resume?.personalDetails?.lastName}
           </h1>
-          <p className="text-lg text-gray-600 mb-4">Web Developer</p>
+          <p className="text-lg text-gray-600 mb-4">
+            {resume?.experienceDetails[0]?.role}
+          </p>
         </div>
         <hr className="my-4" />
         <div className="my-4">
           <h2 className="text-xl font-semibold text-gray-800 mb-2">Summary</h2>
-          <p className="text-gray-700">
-            {resume?.personalDetails?.Description}
-          </p>
+          <p
+            className="text-gray-700"
+            dangerouslySetInnerHTML={{
+              __html: resume?.personalDetails?.description,
+            }}
+          ></p>
         </div>
         <div className="my-4">
           <h2 className="text-xl font-semibold text-gray-800 mb-2">Skills</h2>
@@ -35,12 +40,23 @@ const Template3 = ({ resume }) => {
             Experience
           </h2>
           <div className="mb-4">
-            <h3 className="font-bold text-gray-800">Frontend Developer</h3>
-            <p className="text-gray-600">XYZ Tech - 2020-Present</p>
-            <ul className="list-disc list-inside text-gray-700">
-              <li>Developed user interfaces using React and Tailwind CSS.</li>
-              <li>Implemented state management with Redux.</li>
-            </ul>
+            <h3 className="font-bold text-gray-800">
+              {resume?.experienceDetails[0]?.role}
+            </h3>
+            <p className="text-gray-600">
+              {resume?.experienceDetails[0]?.company}
+              <span className=" mx-4">
+                {" "}
+                {resume?.experienceDetails[0]?.employerStart}
+                {resume?.experienceDetails[0]?.employerFinish}
+              </span>
+            </p>
+
+            <p
+              dangerouslySetInnerHTML={{
+                __html: resume?.experienceDetails[0]?.description,
+              }}
+            ></p>
           </div>
           <div>
             <h3 className="font-bold text-gray-800">Web Developer</h3>
@@ -62,9 +78,11 @@ const Template3 = ({ resume }) => {
           </h2>
           <div>
             <h3 className="font-bold text-gray-800">
-              Bachelor of Science in Computer Science
+              {resume?.educationDetails[0]?.course}
             </h3>
-            <p className="text-gray-600">University of Tech - 2014-2018</p>
+            <p className="text-gray-600">
+              {resume?.educationDetails[0]?.institutionName} - 2014-2018
+            </p>
           </div>
         </div>
       </div>

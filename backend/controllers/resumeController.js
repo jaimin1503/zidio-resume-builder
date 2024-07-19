@@ -1,5 +1,6 @@
 import { Resume } from "../models/resumeModel.js";
 import { User } from "../models/userModel.js";
+import mongoose from "mongoose";
 
 export const createResume = async (req, res) => {
   try {
